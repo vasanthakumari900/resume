@@ -47,12 +47,15 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   const copyPlainText = () => {
     const text = `
 THARUN B S
-UI/UX Designer & Computer Science Student
+UI/UX Designer & Product Thinker
 Location: ${PERSONAL_INFO.location}
 Email: ${PERSONAL_INFO.email}
 Phone: ${PERSONAL_INFO.phone}
+Portfolio: ${PERSONAL_INFO.portfolioDisplay}
 LinkedIn: ${PERSONAL_INFO.linkedin}
 GitHub: ${PERSONAL_INFO.github}
+
+LINKS: PORTFOLIO: ${PERSONAL_INFO.portfolioDisplay} | LINKEDIN: ${PERSONAL_INFO.linkedin} | GITHUB: ${PERSONAL_INFO.github}
 
 SUMMARY:
 ${PERSONAL_INFO.summary}
@@ -136,12 +139,16 @@ HACKATHON:
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-[#525252]">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono text-[#525252]">
               <span>{PERSONAL_INFO.location.toUpperCase()}</span>
               <span>·</span>
               <a href={`mailto:${PERSONAL_INFO.email}`} className="hover:underline">{PERSONAL_INFO.email}</a>
               <span>·</span>
               <span>{PERSONAL_INFO.phoneDisplay}</span>
+              <span>·</span>
+              <a href={PERSONAL_INFO.portfolioUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-[#0A0A0A] underline underline-offset-4">
+                PORTFOLIO: {PERSONAL_INFO.portfolioDisplay}
+              </a>
               <span>·</span>
               <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline">LINKEDIN</a>
               <span>·</span>

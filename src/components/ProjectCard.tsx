@@ -29,52 +29,64 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
+  const projectContributionMap: Record<string, string> = {
+    'pralaya-ai':
+      'Dashboard experience, interface design contribution, GIS-based visualization, and product implementation.',
+    'certiseal':
+      'Structured UI development, verification workflow interface, user-friendly verification experience, and frontend implementation.',
+    'cs-academic-portal':
+      'Responsive interface development, academic information organization, student-focused interface, and repository deployment.',
+  };
+
+  const myContribution = projectContributionMap[project.id] || project.keyContributions.slice(0, 3).join(', ');
+
   if (isFeatured) {
     return (
-      <div className="group relative bg-white border border-[#E5E5E5] hover:border-[#737373] transition-all duration-200">
+      <div className="group relative bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] transition-all duration-200">
         <div className="p-8 sm:p-10 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Project Editorial Info */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-4 font-mono text-xs">
-                <span className="text-xl font-bold text-[#0A0A0A]">{projectNumber}</span>
-                <span className="uppercase text-[#525252] tracking-wider">{project.category}</span>
+              <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3 font-mono text-xs">
+                <span className="text-xl font-extrabold text-[#0A0A0A]">PROJECT {projectNumber}</span>
+                <span className="uppercase text-[#525252] font-semibold tracking-wider">{project.category}</span>
               </div>
 
               <div>
                 <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
                   {project.title}
                 </h3>
-                <p className="mt-1 text-sm font-mono text-[#525252]">
+                <p className="mt-1 text-xs font-mono text-[#525252]">
                   {project.subtitle}
                 </p>
               </div>
 
-              <p className="text-sm text-[#525252] leading-relaxed">
-                {project.description}
-              </p>
-
-              {/* Verified Technical Contributions */}
-              <div className="space-y-2 pt-2">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#737373] block">
-                  Core Implementation Areas:
+              {/* One-Line Description */}
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase text-[#737373] font-bold block">
+                  PRODUCT OVERVIEW
                 </span>
-                <ul className="space-y-1.5 text-xs text-[#0A0A0A] font-mono">
-                  {project.keyContributions.slice(0, 3).map((contrib, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-[#737373]">—</span>
-                      <span>{contrib}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-sm text-[#525252] leading-relaxed">
+                  {project.description}
+                </p>
               </div>
 
-              {/* Minimal Technology Tags */}
-              <div className="flex flex-wrap gap-2 pt-2 border-t border-[#E5E5E5]">
-                {project.technologies.map((tech) => (
+              {/* My Contribution - Recruiter highlight */}
+              <div className="p-4 bg-[#F7F7F7] border border-[#E5E5E5] space-y-1 font-mono text-xs">
+                <span className="text-[10px] text-[#737373] uppercase font-bold block">
+                  MY CONTRIBUTION
+                </span>
+                <p className="text-xs text-[#0A0A0A] font-semibold leading-relaxed">
+                  {myContribution}
+                </p>
+              </div>
+
+              {/* Most Relevant Technologies Only */}
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {project.technologies.slice(0, 5).map((tech) => (
                   <span
                     key={tech}
-                    className="text-[11px] font-mono uppercase text-[#525252] bg-[#F7F7F7] px-2.5 py-1 border border-[#E5E5E5]"
+                    className="text-[10px] font-mono uppercase text-[#525252] bg-[#FAFAFA] px-2 py-0.5 border border-[#E5E5E5]"
                   >
                     {tech}
                   </span>
@@ -82,7 +94,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               </div>
 
               {/* Action Links */}
-              <div className="pt-4 flex flex-wrap items-center gap-6 font-mono text-xs">
+              <div className="pt-2 flex flex-wrap items-center gap-6 font-mono text-xs">
                 <button
                   onClick={() => onOpenCaseStudy(project.id)}
                   className="group/btn inline-flex items-center gap-2 px-5 py-3 bg-[#0A0A0A] text-white hover:bg-neutral-800 transition-colors uppercase tracking-wider font-semibold"
@@ -95,10 +107,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[#0A0A0A] hover:underline underline-offset-4"
+                  className="flex items-center gap-1 text-[#0A0A0A] hover:underline underline-offset-4 font-bold"
                 >
                   <span>LIVE PLATFORM</span>
-                  <ArrowUpRight className="w-3 h-3" />
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
                 <a
@@ -123,11 +135,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   // Secondary Asymmetric Project Card (02 & 03)
   return (
-    <div className="group bg-white border border-[#E5E5E5] hover:border-[#737373] transition-all duration-200 flex flex-col justify-between">
-      <div className="p-8 space-y-6">
+    <div className="group bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] transition-all duration-200 flex flex-col justify-between">
+      <div className="p-8 space-y-5">
         <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3 font-mono text-xs">
-          <span className="text-lg font-bold text-[#0A0A0A]">{projectNumber}</span>
-          <span className="uppercase text-[#737373] tracking-wider">{project.category}</span>
+          <span className="text-base font-extrabold text-[#0A0A0A]">PROJECT {projectNumber}</span>
+          <span className="uppercase text-[#737373] tracking-wider text-[11px] font-semibold">{project.category}</span>
         </div>
 
         <div>
@@ -139,19 +151,30 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
         </div>
 
+        {/* Product Overview */}
         <p className="text-xs sm:text-sm text-[#525252] leading-relaxed">
           {project.description}
         </p>
 
-        {/* Visual Frame */}
-        <div className="pt-2">{renderPreview()}</div>
+        {/* My Contribution */}
+        <div className="p-3.5 bg-[#F7F7F7] border border-[#E5E5E5] space-y-1 font-mono text-xs">
+          <span className="text-[10px] text-[#737373] uppercase font-bold block">
+            MY CONTRIBUTION
+          </span>
+          <p className="text-xs text-[#0A0A0A] font-medium leading-relaxed">
+            {myContribution}
+          </p>
+        </div>
 
-        {/* Minimal Tags */}
-        <div className="flex flex-wrap gap-1.5 pt-2">
-          {project.technologies.slice(0, 5).map((tech) => (
+        {/* Visual Preview */}
+        <div className="pt-1">{renderPreview()}</div>
+
+        {/* Relevant Tech Tags */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="text-[10px] font-mono uppercase text-[#737373] bg-[#F7F7F7] px-2 py-0.5 border border-[#E5E5E5]"
+              className="text-[10px] font-mono uppercase text-[#737373] bg-[#FAFAFA] px-2 py-0.5 border border-[#E5E5E5]"
             >
               {tech}
             </span>
@@ -175,7 +198,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-[#737373] hover:text-[#0A0A0A] hover:underline underline-offset-4"
         >
-          <span>DEMO</span>
+          <span>LIVE PLATFORM</span>
           <ArrowUpRight className="w-3 h-3" />
         </a>
       </div>
