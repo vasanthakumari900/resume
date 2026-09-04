@@ -1,14 +1,19 @@
+import React from 'react';
 import type { Project } from '../types';
 import { PralayaPreview, CertiSealPreview, AcademicPortalPreview } from './ProjectPreviews';
-import { ExternalLink, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { GithubIcon } from './Icons';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
+  projectNumber: string;
   onOpenCaseStudy: (projectId: string) => void;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStudy }) => {
+export const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  projectNumber,
+  onOpenCaseStudy,
+}) => {
   const isFeatured = project.featured;
 
   const renderPreview = () => {
@@ -26,96 +31,89 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStu
 
   if (isFeatured) {
     return (
-      <div className="group relative rounded-3xl bg-white dark:bg-[#111115] border border-neutral-200/90 dark:border-neutral-800/90 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-        {/* Featured Accent Gradient Badge */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-indigo-500" />
-
-        <div className="p-6 sm:p-8 lg:p-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Info Column */}
+      <div className="group relative bg-white border border-[#E5E5E5] hover:border-[#737373] transition-all duration-200">
+        <div className="p-8 sm:p-10 lg:p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Project Editorial Info */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono tracking-wide">
-                  FEATURED PROJECT
-                </span>
-                <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
-                  {project.category}
-                </span>
+              <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-4 font-mono text-xs">
+                <span className="text-xl font-bold text-[#0A0A0A]">{projectNumber}</span>
+                <span className="uppercase text-[#525252] tracking-wider">{project.category}</span>
               </div>
 
               <div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
                   {project.title}
                 </h3>
-                <p className="mt-1.5 text-sm sm:text-base font-medium text-neutral-600 dark:text-neutral-300">
+                <p className="mt-1 text-sm font-mono text-[#525252]">
                   {project.subtitle}
                 </p>
               </div>
 
-              <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+              <p className="text-sm text-[#525252] leading-relaxed">
                 {project.description}
               </p>
 
-              {/* Verified Contributions List */}
-              <div className="space-y-2 pt-1 border-t border-neutral-100 dark:border-neutral-800/80">
-                <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 font-semibold block">
-                  Key Design & Engineering Contributions:
+              {/* Verified Technical Contributions */}
+              <div className="space-y-2 pt-2">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#737373] block">
+                  Core Implementation Areas:
                 </span>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-600 dark:text-neutral-300">
-                  {project.keyContributions.slice(0, 4).map((contrib, idx) => (
+                <ul className="space-y-1.5 text-xs text-[#0A0A0A] font-mono">
+                  {project.keyContributions.slice(0, 3).map((contrib, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                      <span className="text-[#737373]">—</span>
                       <span>{contrib}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Technology Tags */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
+              {/* Minimal Technology Tags */}
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-[#E5E5E5]">
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60"
+                    className="text-[11px] font-mono uppercase text-[#525252] bg-[#F7F7F7] px-2.5 py-1 border border-[#E5E5E5]"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              {/* Action Links */}
+              <div className="pt-4 flex flex-wrap items-center gap-6 font-mono text-xs">
                 <button
                   onClick={() => onOpenCaseStudy(project.id)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 rounded-xl transition-all shadow-xs hover:shadow-md"
+                  className="group/btn inline-flex items-center gap-2 px-5 py-3 bg-[#0A0A0A] text-white hover:bg-neutral-800 transition-colors uppercase tracking-wider font-semibold"
                 >
-                  <span>Explore Case Study</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>VIEW CASE STUDY</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/btn:translate-x-1" />
                 </button>
 
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white bg-neutral-100 dark:bg-neutral-800/80 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl border border-neutral-200/80 dark:border-neutral-700/80 transition-colors"
+                  className="flex items-center gap-1 text-[#0A0A0A] hover:underline underline-offset-4"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Live Platform</span>
+                  <span>LIVE PLATFORM</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
 
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                  className="flex items-center gap-1 text-[#737373] hover:text-[#0A0A0A] hover:underline underline-offset-4"
                 >
-                  <GithubIcon className="w-3.5 h-3.5" />
-                  <span>Source Code</span>
+                  <span>GITHUB</span>
+                  <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
             </div>
 
-            {/* Right Preview Column */}
+            {/* Project Visual Area */}
             <div className="lg:col-span-6 w-full">{renderPreview()}</div>
           </div>
         </div>
@@ -123,88 +121,62 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenCaseStu
     );
   }
 
-  // Standard asymmetric card (CertiSeal, Academic Portal)
+  // Secondary Asymmetric Project Card (02 & 03)
   return (
-    <div className="group relative rounded-3xl bg-white dark:bg-[#111115] border border-neutral-200/90 dark:border-neutral-800/90 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between">
-      <div className="p-6 sm:p-8 space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="px-2.5 py-1 text-[11px] font-mono font-medium rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">
-            {project.category}
-          </span>
-          <div className="flex items-center gap-2">
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 text-neutral-500 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              title="Visit Live Application"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 text-neutral-500 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              title="View GitHub Repository"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-          </div>
+    <div className="group bg-white border border-[#E5E5E5] hover:border-[#737373] transition-all duration-200 flex flex-col justify-between">
+      <div className="p-8 space-y-6">
+        <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3 font-mono text-xs">
+          <span className="text-lg font-bold text-[#0A0A0A]">{projectNumber}</span>
+          <span className="uppercase text-[#737373] tracking-wider">{project.category}</span>
         </div>
 
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white tracking-tight">
+          <h3 className="text-2xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
             {project.title}
           </h3>
-          <p className="mt-1 text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400">
+          <p className="mt-1 text-xs font-mono text-[#525252]">
             {project.subtitle}
           </p>
         </div>
 
-        <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed line-clamp-3">
+        <p className="text-xs sm:text-sm text-[#525252] leading-relaxed">
           {project.description}
         </p>
 
-        {/* Visual Preview */}
+        {/* Visual Frame */}
         <div className="pt-2">{renderPreview()}</div>
 
-        {/* Technologies */}
+        {/* Minimal Tags */}
         <div className="flex flex-wrap gap-1.5 pt-2">
           {project.technologies.slice(0, 5).map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 text-[10px] font-mono rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60"
+              className="text-[10px] font-mono uppercase text-[#737373] bg-[#F7F7F7] px-2 py-0.5 border border-[#E5E5E5]"
             >
               {tech}
             </span>
           ))}
-          {project.technologies.length > 5 && (
-            <span className="px-1.5 py-0.5 text-[10px] font-mono text-neutral-400">
-              +{project.technologies.length - 5}
-            </span>
-          )}
         </div>
       </div>
 
-      {/* Card Footer Button */}
-      <div className="px-6 py-4 sm:px-8 bg-neutral-50/70 dark:bg-neutral-950/40 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center justify-between">
+      {/* Card Footer Actions */}
+      <div className="px-8 py-4 bg-[#FAFAFA] border-t border-[#E5E5E5] flex items-center justify-between font-mono text-xs">
         <button
           onClick={() => onOpenCaseStudy(project.id)}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+          className="group/link inline-flex items-center gap-1.5 font-bold uppercase text-[#0A0A0A] hover:underline underline-offset-4"
         >
-          <span>View Case Study</span>
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          <span>VIEW CASE STUDY</span>
+          <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
         </button>
 
         <a
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-white flex items-center gap-1 font-mono transition-colors"
+          className="flex items-center gap-1 text-[#737373] hover:text-[#0A0A0A] hover:underline underline-offset-4"
         >
-          <span>Live Demo</span>
-          <ExternalLink className="w-3 h-3" />
+          <span>DEMO</span>
+          <ArrowUpRight className="w-3 h-3" />
         </a>
       </div>
     </div>

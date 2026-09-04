@@ -1,74 +1,60 @@
 import React from 'react';
 import { EDUCATION_ITEMS } from '../data/portfolioData';
-import { GraduationCap, Award, Calendar, Building2 } from 'lucide-react';
 
 export const Education: React.FC = () => {
   return (
-    <section id="education" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-3 mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs font-mono text-neutral-600 dark:text-neutral-400">
-            <GraduationCap className="w-3 h-3 text-indigo-500" />
-            <span>ACADEMIC FOUNDATION</span>
+    <section id="education" className="py-24 md:py-32 bg-white border-t border-[#E5E5E5]">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-[#E5E5E5]">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-[#0A0A0A]" />
+              <span className="text-xs font-mono tracking-widest uppercase text-[#737373] font-semibold">
+                INDEX // 05
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0A0A0A] uppercase">
+              Education
+            </h2>
+            <p className="text-sm sm:text-base text-[#525252] max-w-xl font-normal">
+              Foundational computational curriculum in computer science and software systems.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 dark:text-white tracking-tight">
-            Education
-          </h2>
-          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-xl">
-            A solid computational grounding in computer science, software engineering, and analytical thinking.
-          </p>
+
+          <div className="font-mono text-xs text-[#737373] uppercase">
+            Academic Performance Verified
+          </div>
         </div>
 
-        {/* Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {EDUCATION_ITEMS.map((item, index) => (
+        {/* Editorial Education Rows */}
+        <div className="space-y-8">
+          {EDUCATION_ITEMS.map((item) => (
             <div
               key={item.id}
-              className={`p-6 sm:p-8 rounded-3xl border transition-all duration-200 flex flex-col justify-between ${
-                index === 0
-                  ? 'bg-white dark:bg-[#111115] border-indigo-200/80 dark:border-indigo-900/60 shadow-lg'
-                  : 'bg-white dark:bg-[#111115] border-neutral-200/80 dark:border-neutral-800/80 shadow-xs'
-              }`}
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-8 border-b border-[#E5E5E5] items-start"
             >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-neutral-500 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {item.period}
-                  </span>
-                  {index === 0 && (
-                    <span className="px-2 py-0.5 text-[10px] font-mono font-semibold rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
-                      In Progress
-                    </span>
-                  )}
-                </div>
+              <div className="md:col-span-3 font-mono text-xs text-[#737373]">
+                <span className="font-bold text-[#0A0A0A] text-sm block">{item.period}</span>
+                <span className="uppercase text-[11px] block mt-0.5">
+                  {item.scoreType}: {item.score}
+                </span>
+              </div>
 
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white leading-snug">
+              <div className="md:col-span-9 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                  <h3 className="text-xl font-bold text-[#0A0A0A] uppercase tracking-tight">
                     {item.degree}
                   </h3>
-                  <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400 mt-1 flex items-center gap-1.5">
-                    <Building2 className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-                    <span>{item.institution}</span>
-                  </p>
+                  <span className="font-mono text-xs text-[#525252] uppercase font-semibold">
+                    {item.institution}
+                  </span>
                 </div>
 
                 {item.details && (
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#525252] font-mono leading-relaxed">
                     {item.details}
                   </p>
                 )}
-              </div>
-
-              {/* Score Highlight Box */}
-              <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
-                <span className="text-xs font-mono text-neutral-400 uppercase">
-                  Academic Performance
-                </span>
-                <div className="flex items-center gap-1 font-mono font-bold text-sm text-neutral-900 dark:text-white">
-                  <Award className="w-4 h-4 text-indigo-500" />
-                  <span>{item.score}</span>
-                </div>
               </div>
             </div>
           ))}

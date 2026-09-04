@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { ArrowUp, Mail } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { ArrowUp, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const [time, setTime] = useState<string>('');
@@ -28,60 +27,51 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="py-12 border-t border-neutral-200/80 dark:border-neutral-800/80 bg-white/50 dark:bg-[#0A0A0C]/50 text-xs font-mono">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="py-12 bg-[#0A0A0A] text-white border-t border-[#262626] font-mono text-xs">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Copyright & Designer credits */}
+          {/* Copyright & Design credit */}
           <div className="space-y-1 text-center md:text-left">
-            <p className="text-neutral-900 dark:text-white font-semibold">
-              © 2026 {PERSONAL_INFO.name} · All rights reserved.
+            <p className="font-bold uppercase tracking-wider text-white">
+              © 2026 {PERSONAL_INFO.name} // ALL RIGHTS RESERVED
             </p>
-            <p className="text-neutral-500 dark:text-neutral-400 text-[11px]">
-              Designed in Figma & built with React.js, TypeScript & Tailwind CSS.
+            <p className="text-[#737373] text-[11px] uppercase">
+              DESIGNED IN FIGMA · IMPLEMENTED IN REACT & TAILWIND CSS
             </p>
           </div>
 
-          {/* Time & Location */}
-          <div className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-900 px-3.5 py-1.5 rounded-full border border-neutral-200/70 dark:border-neutral-800/70">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Tiruvallur, IN · {time || 'IST'}</span>
+          {/* Time & Region */}
+          <div className="text-[#737373] text-[11px] uppercase tracking-wider">
+            TIRUVALLUR, IN · {time || 'IST'}
           </div>
 
-          {/* Socials & Back to Top */}
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              >
-                <LinkedinIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              >
-                <GithubIcon className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${PERSONAL_INFO.email}`}
-                aria-label="Email"
-                className="p-2 text-neutral-500 hover:text-neutral-900 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
-            </div>
+          {/* Action Links & Back to Top */}
+          <div className="flex items-center gap-6">
+            <a
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#A3A3A3] hover:text-white uppercase flex items-center gap-1"
+            >
+              <span>LINKEDIN</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
+
+            <a
+              href={PERSONAL_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#A3A3A3] hover:text-white uppercase flex items-center gap-1"
+            >
+              <span>GITHUB</span>
+              <ArrowUpRight className="w-3 h-3" />
+            </a>
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-100 dark:bg-neutral-900 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition-colors border border-neutral-200/70 dark:border-neutral-800/70"
+              className="flex items-center gap-1 text-white hover:underline underline-offset-4 uppercase font-bold"
             >
-              <span>Top</span>
+              <span>TOP</span>
               <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>

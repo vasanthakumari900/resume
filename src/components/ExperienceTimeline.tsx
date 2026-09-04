@@ -1,83 +1,72 @@
 import React from 'react';
 import { EXPERIENCE_ITEMS, HACKATHON_ACHIEVEMENT } from '../data/portfolioData';
-import {
-  Briefcase,
-  Trophy,
-  Calendar,
-  Clock,
-  CheckCircle2,
-  ShieldCheck,
-  Award,
-} from 'lucide-react';
 
 export const ExperienceTimeline: React.FC = () => {
   return (
-    <section id="experience" className="py-20 md:py-28 relative bg-neutral-50/50 dark:bg-neutral-950/30 border-y border-neutral-200/60 dark:border-neutral-800/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <section id="experience" className="py-24 md:py-32 bg-white border-t border-[#E5E5E5]">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-24">
         {/* Work Experience Subsection */}
         <div>
-          <div className="space-y-3 mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs font-mono text-neutral-600 dark:text-neutral-400">
-              <Briefcase className="w-3 h-3 text-indigo-500" />
-              <span>INDUSTRY IMMERSION</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-[#E5E5E5]">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-[#0A0A0A]" />
+                <span className="text-xs font-mono tracking-widest uppercase text-[#737373] font-semibold">
+                  INDEX // 04
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#0A0A0A] uppercase">
+                Experience
+              </h2>
+              <p className="text-sm sm:text-base text-[#525252] max-w-xl font-normal">
+                Professional exposure and developer workflows within structured engineering environments.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 dark:text-white tracking-tight">
-              Experience
-            </h2>
-            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-xl">
-              Practical software engineering exposure and hands-on developer workflows.
-            </p>
+
+            <div className="font-mono text-xs text-[#737373] uppercase">
+              Practical Immersion
+            </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {EXPERIENCE_ITEMS.map((item) => (
               <div
                 key={item.id}
-                className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#111115] border border-neutral-200/90 dark:border-neutral-800/90 shadow-md space-y-5"
+                className="grid grid-cols-1 md:grid-cols-12 gap-6 pb-8 border-b border-[#E5E5E5] items-start"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-100 dark:border-neutral-800 pb-4">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white">
-                        {item.role}
-                      </h3>
-                      <span className="px-2.5 py-0.5 text-[11px] font-mono font-semibold rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
-                        {item.type}
-                      </span>
-                    </div>
-                    <p className="text-sm font-semibold text-neutral-600 dark:text-neutral-300 mt-0.5">
-                      {item.company}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-xs font-mono text-neutral-500 dark:text-neutral-400">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5" />
-                      {item.period}
-                    </span>
-                    <span>·</span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" />
-                      {item.duration}
-                    </span>
-                  </div>
+                {/* Date Left */}
+                <div className="md:col-span-3 font-mono text-xs text-[#737373] space-y-1">
+                  <span className="font-bold text-[#0A0A0A] text-sm block">{item.period}</span>
+                  <span className="uppercase text-[11px] block">{item.duration} · {item.type}</span>
                 </div>
 
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  {item.description}
-                </p>
+                {/* Content Right */}
+                <div className="md:col-span-9 space-y-3">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <h3 className="text-xl font-bold text-[#0A0A0A] uppercase tracking-tight">
+                      {item.role}
+                    </h3>
+                    <span className="font-mono text-xs text-[#525252] uppercase font-bold">
+                      {item.company}
+                    </span>
+                  </div>
 
-                <div className="space-y-2 pt-2">
-                  <span className="text-xs font-mono uppercase text-neutral-400 font-semibold block">
-                    Key Verified Learning Areas:
-                  </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-neutral-700 dark:text-neutral-300">
-                    {item.learningAreas.map((area, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5" />
-                        <span>{area}</span>
-                      </div>
-                    ))}
+                  <p className="text-sm text-[#525252] leading-relaxed">
+                    {item.description}
+                  </p>
+
+                  <div className="pt-2">
+                    <span className="text-[11px] font-mono text-[#737373] uppercase block mb-1">
+                      Key Competencies Covered:
+                    </span>
+                    <ul className="space-y-1 text-xs font-mono text-[#0A0A0A]">
+                      {item.learningAreas.map((area, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-[#737373]">—</span>
+                          <span>{area}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -85,73 +74,63 @@ export const ExperienceTimeline: React.FC = () => {
           </div>
         </div>
 
-        {/* Hackathon & Competitions Spotlight */}
+        {/* Smart India Hackathon Spotlight */}
         <div>
-          <div className="space-y-3 mb-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs font-mono text-neutral-600 dark:text-neutral-400">
-              <Trophy className="w-3 h-3 text-amber-500" />
-              <span>COMPETITIVE ACHIEVEMENTS</span>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-[#E5E5E5]">
+            <div className="space-y-2">
+              <span className="text-xs font-mono tracking-widest uppercase text-[#737373] font-semibold block">
+                NATIONAL COMPETITION
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
+                Building & Competing Beyond the Classroom
+              </h3>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-950 dark:text-white tracking-tight">
-              Building and competing beyond the classroom.
-            </h2>
-            <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 max-w-xl">
-              Applying product design thinking and system architecture to national-level engineering challenges.
-            </p>
+            <span className="font-mono text-xs text-[#737373] uppercase">
+              MINISTRY OF HOME AFFAIRS TRACK
+            </span>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#111115] border border-amber-300/40 dark:border-amber-500/30 shadow-xl relative overflow-hidden space-y-6">
-            {/* Top Amber Accent Glow */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400" />
-
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-              <div className="space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 text-xs font-mono font-bold rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5" />
-                    {HACKATHON_ACHIEVEMENT.achievement}
-                  </span>
-                  <span className="text-xs font-mono text-neutral-500">
-                    {HACKATHON_ACHIEVEMENT.competition} · {HACKATHON_ACHIEVEMENT.year}
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white">
-                  {HACKATHON_ACHIEVEMENT.projectTitle}
-                </h3>
+          <div className="border border-[#0A0A0A] p-8 sm:p-10 space-y-6 bg-white">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#E5E5E5] pb-6 font-mono">
+              <div className="space-y-1">
+                <span className="text-xs text-[#737373] uppercase">COMPETITION</span>
+                <h4 className="text-xl font-bold text-[#0A0A0A] uppercase">
+                  {HACKATHON_ACHIEVEMENT.competition} · {HACKATHON_ACHIEVEMENT.year}
+                </h4>
+                <p className="text-xs text-[#525252] uppercase mt-1">
+                  PROBLEM ID: {HACKATHON_ACHIEVEMENT.problemStatementId} · ORG: {HACKATHON_ACHIEVEMENT.organization}
+                </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs font-mono text-neutral-600 dark:text-neutral-400 space-y-1 shrink-0">
-                <div>
-                  <span className="text-neutral-400 text-[10px] block">Problem Statement</span>
-                  <span className="font-bold text-neutral-900 dark:text-white">{HACKATHON_ACHIEVEMENT.problemStatementId}</span>
-                </div>
-                <div className="text-[11px]">Org: {HACKATHON_ACHIEVEMENT.organization}</div>
+              <div className="text-left sm:text-right font-mono shrink-0">
+                <span className="text-[10px] text-[#737373] uppercase block">EVALUATION STATUS</span>
+                <span className="inline-block px-3 py-1 bg-[#0A0A0A] text-white font-bold text-xs uppercase mt-1">
+                  {HACKATHON_ACHIEVEMENT.achievement}
+                </span>
               </div>
             </div>
 
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
-              {HACKATHON_ACHIEVEMENT.description}
-            </p>
+            <div className="space-y-2">
+              <h5 className="text-lg font-bold text-[#0A0A0A] uppercase">
+                {HACKATHON_ACHIEVEMENT.projectTitle}
+              </h5>
+              <p className="text-sm text-[#525252] leading-relaxed">
+                {HACKATHON_ACHIEVEMENT.description}
+              </p>
+            </div>
 
-            <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800 flex flex-wrap items-center justify-between gap-3">
+            <div className="pt-4 border-t border-[#E5E5E5] flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-[#737373]">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-neutral-400">Track: {HACKATHON_ACHIEVEMENT.track}</span>
-                <span className="text-neutral-300 dark:text-neutral-700">·</span>
-                {HACKATHON_ACHIEVEMENT.focusAreas.map((focus) => (
-                  <span
-                    key={focus}
-                    className="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200/60 dark:border-neutral-700/60"
-                  >
-                    {focus}
+                <span className="uppercase text-[#0A0A0A] font-bold">TRACK:</span>
+                <span>{HACKATHON_ACHIEVEMENT.track.toUpperCase()}</span>
+                <span>·</span>
+                {HACKATHON_ACHIEVEMENT.focusAreas.map((fa) => (
+                  <span key={fa} className="bg-[#F7F7F7] px-2 py-0.5 border border-[#E5E5E5] uppercase text-[10px]">
+                    {fa}
                   </span>
                 ))}
               </div>
-
-              <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                Ministry-Evaluated Submission
-              </span>
+              <span className="text-[#0A0A0A] font-semibold">OFFICIAL SIH SUBMISSION</span>
             </div>
           </div>
         </div>

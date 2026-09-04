@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { SelectedWork } from './components/SelectedWork';
@@ -14,35 +14,15 @@ import { CaseStudyModal } from './components/CaseStudyModal';
 import { ResumeModal } from './components/ResumeModal';
 
 export const App: React.FC = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved === 'dark';
-    return true; // Default to dark mode for that sleek modern product designer feel
-  });
-
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [darkMode]);
-
   return (
-    <div className="min-h-screen bg-[#FBFBFD] dark:bg-[#0A0A0C] text-neutral-900 dark:text-neutral-100 selection:bg-indigo-600 selection:text-white transition-colors duration-200">
-      {/* Sticky Navigation */}
-      <Navbar
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        onOpenResume={() => setIsResumeOpen(true)}
-      />
+    <div className="min-h-screen bg-white text-[#0A0A0A] font-sans selection:bg-[#0A0A0A] selection:text-white antialiased">
+      {/* Editorial Monochrome Navigation */}
+      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Main Sections */}
+      {/* Main Content Sections */}
       <main>
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
         <SelectedWork onOpenCaseStudy={(id) => setSelectedCaseStudyId(id)} />
@@ -58,13 +38,13 @@ export const App: React.FC = () => {
       {/* Footer */}
       <Footer />
 
-      {/* Full Case Study Reader Modal */}
+      {/* Editorial Case Study Modal */}
       <CaseStudyModal
         projectId={selectedCaseStudyId}
         onClose={() => setSelectedCaseStudyId(null)}
       />
 
-      {/* Printable / Downloadable Resume Modal */}
+      {/* Printable / Exportable Resume Sheet Modal */}
       <ResumeModal
         isOpen={isResumeOpen}
         onClose={() => setIsResumeOpen(false)}
