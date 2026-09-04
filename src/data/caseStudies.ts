@@ -13,6 +13,12 @@ export interface DesignDecision {
   rationale: string;
 }
 
+export interface CaseStudyScreenshot {
+  url: string;
+  title: string;
+  caption: string;
+}
+
 export interface CaseStudyData {
   projectId: string;
   number: string;
@@ -23,6 +29,7 @@ export interface CaseStudyData {
   liveUrl: string;
   githubUrl: string;
   atAGlance: CaseStudyAtAGlance;
+  screenshots: CaseStudyScreenshot[];
   summary: string;
   theContext: string;
   theProblem: {
@@ -72,6 +79,18 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       liveUrl: 'https://disaster-phi-two.vercel.app/',
       githubUrl: 'https://github.com/vasanthakumari900/DISASTER.git',
     },
+    screenshots: [
+      {
+        url: '/screenshots/pralaya-main.png',
+        title: 'OPERATIONS COMMAND & GIS HAZARD VIEWPORT',
+        caption: 'Live production Leaflet GIS map with ML landslide risk grid, coordinate system (WGS84), active alerts feed, and telemetry layers.',
+      },
+      {
+        url: '/screenshots/pralaya-simulator.png',
+        title: 'WHAT-IF LANDSLIDE RISK SIMULATOR',
+        caption: 'Interactive stress test engine allowing operators to perturb continuous rainfall duration (+50%) and simulate slope stability across regional sectors.',
+      },
+    ],
     summary:
       'PRALAYA AI is an AI-powered disaster intelligence platform engineered to assess landslide risk through environmental telemetry and geospatial visualization, structured as a high-density operations centre interface.',
     theContext:
@@ -91,65 +110,78 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       summary:
         'Led the interface design thinking and contributed directly to the frontend dashboard and geospatial implementation:',
       points: [
-        'Designed the disaster intelligence dashboard experience and visual risk hierarchy',
-        'Contributed to the interface architecture and interactive telemetry widgets',
-        'Developed the GIS-based geospatial visualization using Leaflet GIS overlays',
-        'Engineered the Explainable AI (XAI) feature attribution breakdown to surface risk drivers',
-        'Integrated real-world environmental data sources via FastAPI REST endpoints',
-        'Developed the historical disaster analysis and interactive geographic layer inspection views',
-        'Built a real-data-first product implementation contribution deployed live on Vercel',
+        'UI and dashboard contribution',
+        'Disaster intelligence dashboard experience',
+        'GIS-based visualization',
+        'Risk analysis interface',
+        'AI insight presentation',
+        'Historical analysis experience',
+        'Interactive geographic visualization',
+        'Frontend/product implementation contribution',
       ],
     },
     designDecisions: [
       {
-        title: 'Prioritizing Risk Information Hierarchy',
+        title: 'Prioritizing Risk Information',
         consideration:
-          'Critical early warning alerts must be immediately legible within milliseconds.',
+          'Risk-related information should have strong visual hierarchy so important insights can be understood quickly.',
         rationale:
           'Structured a 4-tier alert system (Safe, Moderate, Elevated, Critical) using distinct high-contrast typography, clear geometric borders, and persistent status banners at the top of the viewport to establish instant situational awareness.',
       },
       {
-        title: 'Geographic Context as Visual Anchor',
+        title: 'Providing Geographic Context',
         consideration:
-          'Numerical telemetry lacks meaning without spatial terrain relationships.',
+          'Geographic visualization is important for interpreting location-based environmental information.',
         rationale:
-          'Positioned the interactive Leaflet GIS map as the visual core (60% canvas), enabling operators to toggle elevation contours, precipitation radar, and hazard pins simultaneously without losing global context.',
+          'Positioned the interactive Leaflet GIS map as the primary visual core, enabling operators to toggle elevation contours, precipitation radar, and hazard pins simultaneously without losing global spatial context.',
       },
       {
-        title: 'Balancing Information Density',
+        title: 'Managing Information Density',
         consideration:
-          'Command centre dashboards must accommodate sensor telemetry without visual exhaustion.',
+          'The interface must balance multiple data sources without overwhelming users.',
         rationale:
           'Employed a modular cockpit architecture with collapsible telemetry drawers and strict typography scales, allowing operators to monitor overview status while drilling down into specific sensor nodes on demand.',
       },
       {
-        title: 'Explainable AI (XAI) Presentation',
+        title: 'Structuring AI Insights',
         consideration:
-          'Operators do not trust black-box scores when lives are on the line.',
+          'AI-generated insights should be presented in a clear and understandable way rather than appearing as unexplained technical output.',
         rationale:
           'Replaced simple confidence percentages with an explicit feature importance panel showing top model drivers (e.g., 48h cumulative rainfall vs. soil pore pressure), providing actionable justification for every alert.',
+      },
+      {
+        title: 'Supporting Historical Exploration',
+        consideration:
+          'Historical information should be structured to help users explore patterns and context.',
+        rationale:
+          'Designed a historical replay and incident timeline that lets analysts scrub through past landslide events, examine environmental baselines prior to slope failure, and validate predictive model accuracy.',
       },
     ],
     challengesAndConstraints: [
       {
-        heading: 'Working with Environmental and Geospatial Data',
+        heading: 'Working with Complex Environmental and Geospatial Information',
         detail:
-          'Handling coordinate projections, topographic contour rendering, and sensor location mapping efficiently within a web browser without performance lag.',
+          'Handling coordinate projections (WGS84 EPSG:4326), topographic contour rendering, and sensor location mapping efficiently within a web browser without performance lag.',
       },
       {
-        heading: 'Presenting Complex Telemetry Clearly',
+        heading: 'Presenting Multiple Data Sources Clearly',
         detail:
-          'Translating technical metrics (soil pore pressure, millimeter precipitation, incline degrees) into human-scannable dashboard gauges.',
+          'Translating heterogeneous metrics (soil pore pressure, millimeter precipitation, incline degrees, and geological fault lines) into cohesive, scannable dashboard gauges.',
       },
       {
-        heading: 'Integrating Real-World Data Sources',
+        heading: 'Integrating Real-World Data',
         detail:
-          'Connecting to live environmental endpoints and managing real-world latency, stale sensor timestamps, and intermittent network feeds.',
+          'Connecting to live environmental endpoints and managing real-world latency, stale sensor timestamps, and intermittent network feeds without UI freezing.',
       },
       {
-        heading: 'Handling Data Gaps Transparently',
+        heading: 'Transparently Handling Data Gaps',
         detail:
-          'Designing honest UI fallback states that explicitly signal offline or disconnected sensor nodes rather than displaying false fallback averages.',
+          'Designing honest UI fallback states that explicitly signal offline or disconnected sensor nodes rather than displaying false fallback averages or misleading assumptions.',
+      },
+      {
+        heading: 'Balancing Technical Complexity with Understandable Interfaces',
+        detail:
+          'Serving both technical GIS analysts and frontline emergency responders through intuitive progressive disclosure of analytical depth.',
       },
     ],
     productAndTechImplementation: {
@@ -184,10 +216,10 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       },
     ],
     whatILearned: [
-      'Designing interfaces for complex, high-stakes information systems under strict ergonomic requirements',
-      'Communicating AI-generated model insights in a structured, transparent manner that earns operator trust',
-      'Architecting interactive geospatial visualizations that remain performant with multi-layer overlays',
-      'Bridging technical computational models with intuitive, user-focused digital product design',
+      'Designing interfaces for complex information systems',
+      'Communicating AI-related insights clearly',
+      'Working with geographic visualization',
+      'Balancing technical complexity with interface clarity',
     ],
     outcomes: {
       summary:
@@ -218,6 +250,18 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       liveUrl: 'https://certiseal.vercel.app/',
       githubUrl: 'https://github.com/vasanthakumari900/CERTISEAL',
     },
+    screenshots: [
+      {
+        url: '/screenshots/certiseal-main.png',
+        title: 'CERTX DIGITAL TRUST ENGINE & CREDENTIAL LOOKUP',
+        caption: 'Public credential verification input with pre-seeded scenario verifications, envelope encryption, and Ed25519 digital signatures.',
+      },
+      {
+        url: '/screenshots/certiseal-verified.png',
+        title: '8-LEVEL EVIDENCE CHAIN VERIFICATION WORKSPACE',
+        caption: 'Operational trust workspace displaying granular verification breakdown across institutional identity, KMS, signature, and ledger continuity.',
+      },
+    ],
     summary:
       'CERTISEAL (CERTX) is a digital credential verification platform built to help academic institutions, employers, and certifiers detect document manipulation through a structured multi-level verification experience.',
     theContext:
@@ -237,40 +281,47 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       summary:
         'Designed and implemented the core user-facing verification interfaces and workflow components:',
       points: [
-        'Structured UI development and clear verification workflow interface',
-        'Designed the user-friendly document verification experience and stepper progression',
-        'Created high-contrast status indicators (VERIFIED, ON_HOLD, RELEASED, REVOKED)',
-        'Contributed to the multi-surface interface layout (Public Verification, Admin Governance, Student Vault)',
-        'Built frontend components in React with clean CSS typography and accessible states',
-        'Managed GitHub version control and continuous edge deployment on Vercel',
+        'Structured UI development',
+        'Verification workflow interface',
+        'User-friendly verification experience',
+        'Frontend development',
+        'GitHub repository contribution',
+        'Deployment contribution',
       ],
     },
     designDecisions: [
       {
-        title: 'Clear Verification Workflow Stepper',
+        title: 'Simplifying the Verification Flow',
         consideration:
-          'Users need complete visibility into the progress of document inspection.',
+          'Users need complete visibility into the progress of document inspection without friction.',
         rationale:
           'Engineered a progressive disclosure stepper (Document Ingestion ➔ Structural Integrity ➔ Digital Signature ➔ Verification Verdict) that replaces ambiguous loading spinners with clear status milestones.',
       },
       {
-        title: 'Trust-Centered Visual Hierarchy',
+        title: 'Surfacing Cryptographic Trust Indicators',
         consideration:
-          'Security platforms must convey institutional authority without unnecessary visual distractions.',
+          'Security platforms must convey institutional authority without unnecessary cryptographic jargon.',
         rationale:
-          'Adopted a crisp, restrained monochrome aesthetic with clear typography and unambiguous border contrast, signaling technical rigor and reliability.',
+          'Adopted a crisp, restrained monochrome aesthetic with clear status indicators (SHA-256, Ed25519, DEK envelope encryption) and unambiguous border contrast, signaling technical rigor and reliability.',
       },
       {
-        title: 'Granular Inspection Findings Matrix',
+        title: 'Structuring Multi-Party Roles',
+        consideration:
+          'Institutions, employers, and students require distinct operational views.',
+        rationale:
+          'Structured the platform into cohesive role workspaces (Employer verification, Institution issuance, Student credential vault) accessible through intuitive mode toggles.',
+      },
+      {
+        title: 'Transparent Verification States & Error Recovery',
         consideration:
           'Binary verdicts (Yes/No) are insufficient for administrative decision-making.',
         rationale:
-          'Structured verification findings into discrete inspection categories: Digital Signature (SHA-256), Typography Alignment, and Anomaly Score, giving verifiers specific forensic details.',
+          'Structured verification findings into discrete forensic categories: Digital Signature, Typography Alignment, and Anomaly Score, giving verifiers specific forensic details.',
       },
     ],
     challengesAndConstraints: [
       {
-        heading: 'Creating a Clear Verification Workflow',
+        heading: 'Designing a Clear Verification Workflow',
         detail:
           'Structuring the step-by-step verification pipeline so non-technical users immediately comprehend each validation check.',
       },
@@ -280,9 +331,9 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
           'Explaining cryptographic validation and anomaly detection without overwhelming users with unnecessary cryptographic jargon.',
       },
       {
-        heading: 'Designing a Structured Multi-Surface Experience',
+        heading: 'Creating a Structured Certificate Verification Experience',
         detail:
-          'Designing cohesive navigation across the public verifier, super admin governance dashboard, and student credential portal.',
+          'Designing cohesive navigation and unambiguous status feedback across verification states (VERIFIED, ON_HOLD, RELEASED, REVOKED).',
       },
     ],
     productAndTechImplementation: {
@@ -313,10 +364,9 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       },
     ],
     whatILearned: [
-      'Designing trust-focused product workflows that reduce user anxiety during credential verification',
-      'Creating structured, progressive-disclosure verification experiences with clear feedback states',
-      'Connecting interface design decisions directly with technical frontend implementation',
-      'Structuring complex multi-surface software architectures into a cohesive user journey',
+      'Designing trust-focused product workflows',
+      'Structuring verification experiences',
+      'Connecting interface design with frontend implementation',
     ],
     outcomes: {
       summary:
@@ -346,6 +396,18 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       liveUrl: 'https://cs-academic-portal.vercel.app/',
       githubUrl: 'https://github.com/vasanthakumari900/cs-academic-portal',
     },
+    screenshots: [
+      {
+        url: '/screenshots/portal-main.png',
+        title: 'CENTRALIZED ACADEMIC PORTAL & RESOURCE REPOSITORY',
+        caption: 'Department of Computer Science hub providing organized access to syllabus modules, lecture notes, question papers, and live calendar.',
+      },
+      {
+        url: '/screenshots/portal-dashboard.png',
+        title: 'STUDENT ACCESS & ROLE ROUTING INTERFACE',
+        caption: 'Responsive authentication state with roll number verification, academic year routing, and instant demo access.',
+      },
+    ],
     summary:
       'A centralized academic platform created for the Department of Computer Science at DG Vaishnav College to organize course syllabi, lab repositories, study modules, and departmental notices into an intuitive, student-focused hub.',
     theContext:
@@ -364,30 +426,31 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       summary:
         'Spearheaded the information architecture and built the responsive web portal for computer science students:',
       points: [
-        'Responsive interface development tailored for mobile and desktop screens',
-        'Academic information organization and hierarchical subject cataloging',
-        'Created a student-focused interface enabling resource discovery within two clicks',
-        'Contributed to core frontend development using React.js and semantic HTML/CSS',
-        'Maintained Git version control and production deployment on Vercel',
+        'Responsive interface development',
+        'Academic information organization',
+        'Student-focused interface',
+        'Frontend development',
+        'Repository contribution',
+        'Deployment contribution',
       ],
     },
     designDecisions: [
       {
-        title: 'Hierarchical Content Organization',
+        title: 'Organizing Information Effectively',
         consideration:
           'Students need immediate access to specific semester subjects without browsing dead ends.',
         rationale:
           'Structured the information taxonomy strictly by Semester ➔ Subject ➔ Module ➔ Resource Type (Lecture Notes, Lab Practicum, Exam Guides), allowing students to reach any document in two interactions.',
       },
       {
-        title: 'Mobile-First Ergonomics',
+        title: 'Designing Responsive Interfaces',
         consideration:
           'Students predominantly look up schedules and syllabus modules on mobile devices while on campus.',
         rationale:
           'Engineered generous touch targets (minimum 44x44px), sticky bottom filters, and readable typography, eliminating horizontal panning and awkward zoom gestures.',
       },
       {
-        title: 'Direct Action Resource Links',
+        title: 'Improving Navigation and Content Structure',
         consideration:
           'Nested download dialogs create unnecessary friction when students need rapid reference in lab sessions.',
         rationale:
@@ -396,7 +459,7 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
     ],
     challengesAndConstraints: [
       {
-        heading: 'Organizing Different Types of Academic Information',
+        heading: 'Organizing Multiple Types of Academic Information',
         detail:
           'Structuring theoretical notes, practical programming code, timetable schedules, and notice boards into one cohesive layout.',
       },
@@ -409,6 +472,11 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         heading: 'Designing Responsive Interfaces',
         detail:
           'Ensuring data tables, code preview snippets, and curriculum roadmaps render legibly on both budget mobile devices and desktop computers.',
+      },
+      {
+        heading: 'Avoiding Unnecessary Information Overload',
+        detail:
+          'Keeping the layout uncluttered and prioritizing daily student workflows over administrative bureaucracy.',
       },
     ],
     productAndTechImplementation: {
@@ -438,10 +506,9 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
       },
     ],
     whatILearned: [
-      'Organizing large volumes of academic information into an intuitive, scalable hierarchy',
-      'Designing mobile-first responsive interfaces tailored for active student workflows',
-      'Considering accessibility and low-bandwidth constraints when designing utility platforms',
-      'Applying product design thinking to solve actual peer problems in an academic environment',
+      'Organizing information effectively',
+      'Designing responsive interfaces',
+      'Improving navigation and content structure',
     ],
     outcomes: {
       summary:

@@ -33,13 +33,14 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
   if (!projectId || !caseStudy) return null;
 
   const sections = [
-    { id: 'glance', label: 'AT A GLANCE' },
-    { id: 'contribution', label: 'MY CONTRIBUTION' },
-    { id: 'problem', label: 'THE PROBLEM' },
-    { id: 'decisions', label: 'DESIGN DECISIONS' },
-    { id: 'challenges', label: 'CHALLENGES & CONSTRAINTS' },
-    { id: 'tech', label: 'TECH IMPLEMENTATION' },
-    { id: 'learned', label: 'WHAT I LEARNED' },
+    { id: 'glance', label: '01. AT A GLANCE' },
+    { id: 'contribution', label: '02. MY CONTRIBUTION' },
+    { id: 'screenshots', label: '03. SCREENSHOTS' },
+    { id: 'problem', label: '04. THE PROBLEM' },
+    { id: 'decisions', label: '05. DESIGN DECISIONS' },
+    { id: 'challenges', label: '06. CONSTRAINTS' },
+    { id: 'tech', label: '07. TECH IMPLEMENTATION' },
+    { id: 'learned', label: '08. WHAT I LEARNED' },
   ];
 
   const scrollToSection = (id: string) => {
@@ -216,10 +217,52 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
             </div>
           </div>
 
-          {/* 3. THE CONTEXT & THE PROBLEM */}
+          {/* 3. REAL PROJECT SCREENSHOTS */}
+          {caseStudy.screenshots && caseStudy.screenshots.length > 0 && (
+            <div id="cs-screenshots" className="space-y-6 scroll-mt-24">
+              <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
+                <div className="flex items-center gap-3">
+                  <span>03</span>
+                  <span>—</span>
+                  <span className="uppercase">REAL PRODUCT SCREENSHOTS</span>
+                </div>
+                <span className="text-[10px] text-[#737373] uppercase font-normal">
+                  AUTHENTIC PRODUCTION DEPLOYMENT
+                </span>
+              </div>
+
+              <div className="space-y-8">
+                {caseStudy.screenshots.map((shot, idx) => (
+                  <div key={idx} className="border border-[#0A0A0A] bg-[#FAFAFA] p-3 sm:p-4 space-y-3">
+                    <div className="flex items-center justify-between px-1 font-mono text-[11px]">
+                      <span className="font-bold text-[#0A0A0A] uppercase tracking-wider">
+                        FIGURE 0{idx + 1} // {shot.title}
+                      </span>
+                      <span className="text-[10px] text-[#737373] uppercase">VERIFIED INTERFACE</span>
+                    </div>
+
+                    <div className="overflow-hidden border border-[#E5E5E5] bg-[#0A0A0A]">
+                      <img
+                        src={shot.url}
+                        alt={shot.title}
+                        className="w-full h-auto object-cover block"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <p className="text-xs text-[#525252] px-1 font-mono leading-relaxed">
+                      <span className="text-[#0A0A0A] font-bold">Caption:</span> {shot.caption}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 4. THE CONTEXT & THE PROBLEM */}
           <div id="cs-problem" className="space-y-4 scroll-mt-24">
             <div className="flex items-center gap-3 border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
-              <span>03</span>
+              <span>04</span>
               <span>—</span>
               <span className="uppercase">THE CONTEXT & PROBLEM</span>
             </div>
@@ -237,10 +280,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
             </div>
           </div>
 
-          {/* 4. DESIGN DECISIONS (3-5 important decisions) */}
+          {/* 5. DESIGN DECISIONS (3-5 important decisions) */}
           <div id="cs-decisions" className="space-y-4 scroll-mt-24">
             <div className="flex items-center gap-3 border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
-              <span>04</span>
+              <span>05</span>
               <span>—</span>
               <span className="uppercase">DESIGN DECISIONS & CONSIDERATIONS</span>
             </div>
@@ -267,10 +310,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
             </div>
           </div>
 
-          {/* 5. CHALLENGES & CONSTRAINTS */}
+          {/* 6. CHALLENGES & CONSTRAINTS */}
           <div id="cs-challenges" className="space-y-4 scroll-mt-24">
             <div className="flex items-center gap-3 border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
-              <span>05</span>
+              <span>06</span>
               <span>—</span>
               <span className="uppercase">CHALLENGES & CONSTRAINTS</span>
             </div>
@@ -288,10 +331,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
             </div>
           </div>
 
-          {/* 6. PRODUCT & TECHNICAL IMPLEMENTATION */}
+          {/* 7. PRODUCT & TECHNICAL IMPLEMENTATION */}
           <div id="cs-tech" className="space-y-4 scroll-mt-24">
             <div className="flex items-center gap-3 border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
-              <span>06</span>
+              <span>07</span>
               <span>—</span>
               <span className="uppercase">PRODUCT & TECHNICAL IMPLEMENTATION</span>
             </div>
@@ -313,10 +356,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({ projectId, onClo
             </div>
           </div>
 
-          {/* 7. WHAT I LEARNED (Reflections on growth) */}
+          {/* 8. WHAT I LEARNED (Reflections on growth) */}
           <div id="cs-learned" className="space-y-4 scroll-mt-24">
             <div className="flex items-center gap-3 border-b border-[#E5E5E5] pb-2 font-mono text-xs font-bold text-[#0A0A0A]">
-              <span>07</span>
+              <span>08</span>
               <span>—</span>
               <span className="uppercase">WHAT I LEARNED</span>
             </div>

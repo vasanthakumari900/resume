@@ -26,18 +26,18 @@ export const PERSONAL_INFO = {
   heroLabel: 'UI/UX DESIGNER · PRODUCT THINKER · FRONTEND BUILDER',
   headline: 'Designing intuitive digital products and bringing ideas to life.',
   subheadline:
-    'I am Tharun B S, a Computer Science student focused on UI/UX and product experiences. I combine design thinking with frontend development and technology to create digital products that solve meaningful problems.',
+    'I am Tharun B S, a Computer Science student focused on UI/UX and product experiences. I combine design thinking with frontend development and technology to create intuitive digital products that solve meaningful problems.',
   aboutHeadline: 'DESIGN-MINDED. TECHNICALLY GROUNDED.',
   aboutParagraphs: [
     'I am a Computer Science student interested in designing digital products that are intuitive, structured, and meaningful.',
     'My work combines UI/UX design, frontend development, and technology. I enjoy translating complex problems into clear digital experiences and understanding how design decisions move from ideas to working products.',
-    'My technical background helps me collaborate across the gap between product design and implementation.',
+    'My technical background helps me understand both product design and implementation.',
   ],
   currentlyFocusedOn: [
-    'Strengthening UI/UX and product design skills through design systems and rapid prototyping in Figma',
-    'Building user-focused digital products with responsive, accessible frontend code',
-    'Creating stronger product case studies focused on honest UX rationale and problem clarity',
-    'Exploring the intersection of AI, design, and technology to build intuitive human-AI interfaces',
+    'Strengthening UI/UX and product design skills',
+    'Building user-focused digital products',
+    'Developing stronger product case studies',
+    'Exploring the intersection of AI, design, and technology',
   ],
   summary:
     'Third-year B.Sc. Computer Science student specializing in UI/UX and product design with frontend engineering experience. Skilled in Figma, wireframing, prototyping, user flows, and responsive web technologies (React.js, JavaScript, HTML, CSS). Experienced in designing and building user-focused platforms involving AI, certificate verification, academic management, and disaster intelligence.',
@@ -125,11 +125,12 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     description: 'User-centered design methods, prototyping, and UI/UX systems.',
     skills: [
       { name: 'Figma', note: 'Design systems, high-fidelity UI, components & variants', highlight: true },
+      { name: 'Canva', note: 'Visual design, layout composition, and presentation assets' },
       { name: 'Wireframing', note: 'Low-to-mid fidelity rapid layout and ergonomic UX', highlight: true },
       { name: 'Prototyping', note: 'Interactive transitions, click-through flows & state mockups', highlight: true },
+      { name: 'User Research', note: 'Needs assessment, problem framing, and task analysis' },
       { name: 'User Flows', note: 'Task mapping, edge-case routing, and intuitive navigation', highlight: true },
       { name: 'Responsive Design', note: 'Fluid grid systems, breakpoints, and mobile-first logic', highlight: true },
-      { name: 'User Research', note: 'Needs assessment, problem framing, and task analysis' },
     ],
   },
   {

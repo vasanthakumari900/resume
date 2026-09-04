@@ -1,5 +1,6 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { InteractiveInspector } from './InteractiveInspector';
 
 export const About: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ export const About: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-[#0A0A0A]" />
               <span className="text-xs font-mono tracking-widest uppercase text-[#737373] font-semibold">
-                INDEX // 02 · ABOUT
+                INDEX // 02 · DESIGN THINKING
               </span>
             </div>
 
@@ -68,6 +69,17 @@ export const About: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Interactive Architectural UI/UX Blueprint Inspector */}
+        <div className="space-y-4 pt-6 border-t border-[#E5E5E5]">
+          <div className="flex items-center justify-between font-mono text-xs text-[#737373] pb-2">
+            <span className="font-bold text-[#0A0A0A] uppercase tracking-wider">
+              INTERACTION & DESIGN SYSTEM INSPECTOR
+            </span>
+            <span className="uppercase">FIGMA TO PRODUCTION WORKFLOW</span>
+          </div>
+          <InteractiveInspector />
         </div>
 
         {/* 13. CURRENTLY FOCUSED ON (Ambitious, continuous growth) */}

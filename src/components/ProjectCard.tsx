@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Project } from '../types';
 import { PralayaPreview, CertiSealPreview, AcademicPortalPreview } from './ProjectPreviews';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Image as ImageIcon, Activity } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -14,9 +14,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   projectNumber,
   onOpenCaseStudy,
 }) => {
+  const [viewMode, setViewMode] = useState<'screenshot' | 'interactive'>('screenshot');
   const isFeatured = project.featured;
 
-  const renderPreview = () => {
+  const projectScreenshotMap: Record<string, string> = {
+    'pralaya-ai': '/screenshots/pralaya-main.png',
+    'certiseal': '/screenshots/certiseal-main.png',
+    'cs-academic-portal': '/screenshots/portal-main.png',
+  };
+
+  const projectContributionMap: Record<string, string> = {
+    'pralaya-ai':
+      'UI and dashboard contribution, GIS-based visualization, risk information presentation, and product/frontend implementation.',
+    'certiseal':
+      'Structured UI development, verification workflow interface, user-friendly verification experience, and frontend implementation.',
+    'cs-academic-portal':
+      'Responsive interface development, academic information organization, student-focused interface, and deployment contribution.',
+  };
+
+  const myContribution = projectContributionMap[project.id] || project.keyContributions.slice(0, 3).join(', ');
+  const screenshotUrl = projectScreenshotMap[project.id];
+
+  const renderInteractivePreview = () => {
     switch (project.previewType) {
       case 'pralaya':
         return <PralayaPreview />;
@@ -29,16 +48,58 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }
   };
 
-  const projectContributionMap: Record<string, string> = {
-    'pralaya-ai':
-      'Dashboard experience, interface design contribution, GIS-based visualization, and product implementation.',
-    'certiseal':
-      'Structured UI development, verification workflow interface, user-friendly verification experience, and frontend implementation.',
-    'cs-academic-portal':
-      'Responsive interface development, academic information organization, student-focused interface, and repository deployment.',
-  };
+  const renderDisplayArea = () => {
+    return (
+      <div className="space-y-2">
+        {/* Toggle Switcher */}
+        <div className="flex items-center justify-between font-mono text-[10px] pb-1">
+          <span className="text-[#737373] uppercase tracking-wider">SURFACE VIEW</span>
+          <div className="flex items-center gap-1 border border-[#E5E5E5] p-0.5 bg-[#F7F7F7]">
+            <button
+              onClick={() => setViewMode('screenshot')}
+              className={`px-2 py-0.5 flex items-center gap-1 uppercase transition-colors ${
+                viewMode === 'screenshot'
+                  ? 'bg-[#0A0A0A] text-white font-bold'
+                  : 'text-[#737373] hover:text-[#0A0A0A]'
+              }`}
+            >
+              <ImageIcon className="w-2.5 h-2.5" />
+              <span>LIVE UI</span>
+            </button>
+            <button
+              onClick={() => setViewMode('interactive')}
+              className={`px-2 py-0.5 flex items-center gap-1 uppercase transition-colors ${
+                viewMode === 'interactive'
+                  ? 'bg-[#0A0A0A] text-white font-bold'
+                  : 'text-[#737373] hover:text-[#0A0A0A]'
+              }`}
+            >
+              <Activity className="w-2.5 h-2.5" />
+              <span>TELEMETRY</span>
+            </button>
+          </div>
+        </div>
 
-  const myContribution = projectContributionMap[project.id] || project.keyContributions.slice(0, 3).join(', ');
+        {/* Content Display */}
+        {viewMode === 'screenshot' && screenshotUrl ? (
+          <div className="border border-[#0A0A0A] bg-[#0A0A0A] overflow-hidden">
+            <img
+              src={screenshotUrl}
+              alt={`${project.title} live interface`}
+              className="w-full h-auto object-cover block"
+              loading="lazy"
+            />
+            <div className="px-3 py-1.5 bg-[#141414] border-t border-[#262626] flex items-center justify-between text-[10px] font-mono text-[#737373]">
+              <span className="text-white">AUTHENTIC DEPLOYED UI</span>
+              <span>1280 × 800</span>
+            </div>
+          </div>
+        ) : (
+          renderInteractivePreview()
+        )}
+      </div>
+    );
+  };
 
   if (isFeatured) {
     return (
@@ -126,7 +187,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </div>
 
             {/* Project Visual Area */}
-            <div className="lg:col-span-6 w-full">{renderPreview()}</div>
+            <div className="lg:col-span-6 w-full">{renderDisplayArea()}</div>
           </div>
         </div>
       </div>
@@ -167,7 +228,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         {/* Visual Preview */}
-        <div className="pt-1">{renderPreview()}</div>
+        <div className="pt-1">{renderDisplayArea()}</div>
 
         {/* Relevant Tech Tags */}
         <div className="flex flex-wrap gap-1.5 pt-1">
