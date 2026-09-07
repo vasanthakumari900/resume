@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { SelectedWork } from './components/SelectedWork';
-import { About } from './components/About';
-import { Skills } from './components/Skills';
-import { ExperienceTimeline } from './components/ExperienceTimeline';
-import { Education } from './components/Education';
-import { Certifications } from './components/Certifications';
-import { Leadership } from './components/Leadership';
-import { Contact } from './components/Contact';
-import { Footer } from './components/Footer';
-import { CaseStudyModal } from './components/CaseStudyModal';
-import { ResumeModal } from './components/ResumeModal';
+import { Navbar, Footer, ScrollProgressBar } from './components/common';
+import {
+  Hero,
+  SelectedWork,
+  About,
+  Skills,
+  ExperienceTimeline,
+  Education,
+  Certifications,
+  Leadership,
+  Contact,
+} from './components/sections';
+import { CaseStudyModal, ResumeModal, RecruiterScanModal } from './components/modals';
 
 export const App: React.FC = () => {
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
+  const [isRecruiterScanOpen, setIsRecruiterScanOpen] = useState<boolean>(false);
 
   return (
-    <div className="min-h-screen bg-white text-[#0A0A0A] font-sans selection:bg-[#0A0A0A] selection:text-white antialiased">
-      {/* Editorial Monochrome Navigation */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#EDEDED] font-sans selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-[#0A0A0A] antialiased transition-colors duration-200">
+      {/* 2px Minimal Top Scroll Progress Bar */}
+      <ScrollProgressBar />
+
+      {/* Editorial Monochrome Navigation with Theme Switcher & Recruiter Scan */}
+      <Navbar
+        onOpenResume={() => setIsResumeOpen(true)}
+        onOpenRecruiterScan={() => setIsRecruiterScanOpen(true)}
+      />
 
       {/* Main Content Sections */}
       <main>
@@ -37,6 +44,16 @@ export const App: React.FC = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* 60-Second Recruiter Briefing Modal */}
+      <RecruiterScanModal
+        isOpen={isRecruiterScanOpen}
+        onClose={() => setIsRecruiterScanOpen(false)}
+        onOpenFullResume={() => {
+          setIsRecruiterScanOpen(false);
+          setIsResumeOpen(true);
+        }}
+      />
 
       {/* Editorial Case Study Modal */}
       <CaseStudyModal

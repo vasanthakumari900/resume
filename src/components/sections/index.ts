@@ -1,0 +1,13 @@
+export { Hero } from './Hero';
+export { SelectedWork } from './SelectedWork';
+export { ProjectCard } from './ProjectCard';
+export { PralayaPreview, CertiSealPreview, AcademicPortalPreview } from './ProjectPreviews';
+export { About } from './About';
+export { Skills } from './Skills';
+export { ExperienceTimeline } from './ExperienceTimeline';
+export { Education } from './Education';
+export { Certifications } from './Certifications';
+export { Leadership } from './Leadership';
+export { Contact } from './Contact';
+export { InteractiveInspector } from './InteractiveInspector';
+export { BeforeAfterSlider } from './BeforeAfterSlider';

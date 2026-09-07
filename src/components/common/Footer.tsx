@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { PERSONAL_INFO } from '../../data/portfolioData';
 import { ArrowUp, ArrowUpRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {

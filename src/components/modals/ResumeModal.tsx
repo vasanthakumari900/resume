@@ -9,7 +9,7 @@ import {
   CERTIFICATIONS,
   LEADERSHIP_ITEMS,
   LANGUAGES,
-} from '../data/portfolioData';
+} from '../../data/portfolioData';
 import { X, Printer, Copy, Check } from 'lucide-react';
 
 interface ResumeModalProps {
@@ -90,19 +90,19 @@ HACKATHON:
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-4xl bg-white text-[#0A0A0A] border border-[#0A0A0A] shadow-2xl my-4 sm:my-8 overflow-hidden"
+        className="relative w-full max-w-4xl bg-white dark:bg-[#121212] text-[#0A0A0A] dark:text-[#EDEDED] border border-[#0A0A0A] dark:border-[#333333] shadow-2xl my-4 sm:my-8 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Controls Bar */}
-        <div className="no-print px-6 sm:px-10 py-4 bg-white border-b border-[#E5E5E5] flex items-center justify-between sticky top-0 z-20 font-mono text-xs">
-          <span className="font-bold uppercase tracking-wider text-[#0A0A0A]">
+        <div className="no-print px-6 sm:px-10 py-4 bg-white dark:bg-[#181818] border-b border-[#E5E5E5] dark:border-[#262626] flex items-center justify-between sticky top-0 z-20 font-mono text-xs">
+          <span className="font-bold uppercase tracking-wider text-[#0A0A0A] dark:text-white">
             CURRICULUM VITAE // THARUN B S
           </span>
 
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrint}
-              className="px-3.5 py-1.5 bg-[#0A0A0A] text-white hover:bg-neutral-800 transition-colors uppercase font-bold flex items-center gap-1.5"
+              className="px-3.5 py-1.5 bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0A0A0A] hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors uppercase font-bold flex items-center gap-1.5"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>PRINT / PDF</span>
@@ -110,7 +110,7 @@ HACKATHON:
 
             <button
               onClick={copyPlainText}
-              className="px-3.5 py-1.5 border border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-colors uppercase flex items-center gap-1.5"
+              className="px-3.5 py-1.5 border border-[#0A0A0A] dark:border-[#404040] text-[#0A0A0A] dark:text-[#EDEDED] hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-white dark:hover:text-[#0A0A0A] transition-colors uppercase flex items-center gap-1.5"
             >
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? 'COPIED' : 'COPY TEXT'}</span>
@@ -119,7 +119,7 @@ HACKATHON:
             <button
               onClick={onClose}
               aria-label="Close"
-              className="p-1 text-[#0A0A0A] hover:bg-[#F7F7F7] border border-[#E5E5E5] ml-1"
+              className="p-1 text-[#0A0A0A] dark:text-white hover:bg-[#F7F7F7] dark:hover:bg-[#262626] border border-[#E5E5E5] dark:border-[#333333] ml-1"
             >
               <X className="w-4 h-4" />
             </button>
@@ -127,14 +127,14 @@ HACKATHON:
         </div>
 
         {/* Resume Sheet */}
-        <div className="p-8 sm:p-12 lg:p-16 space-y-10 max-h-[85vh] overflow-y-auto font-sans leading-relaxed text-[#0A0A0A]">
+        <div className="p-8 sm:p-12 lg:p-16 space-y-10 max-h-[85vh] overflow-y-auto font-sans leading-relaxed text-[#0A0A0A] dark:text-[#EDEDED]">
           {/* Header */}
-          <div className="border-b border-[#0A0A0A] pb-8 space-y-4">
+          <div className="border-b border-[#0A0A0A] dark:border-[#333333] pb-8 space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-              <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A]">
+              <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0A] dark:text-white font-display">
                 {PERSONAL_INFO.name}
               </h1>
-              <span className="text-xs sm:text-sm font-mono uppercase text-[#525252] font-semibold">
+              <span className="text-xs sm:text-sm font-mono uppercase text-[#525252] dark:text-[#A3A3A3] font-semibold">
                 {PERSONAL_INFO.role}
               </span>
             </div>

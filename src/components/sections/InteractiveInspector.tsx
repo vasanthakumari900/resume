@@ -17,9 +17,9 @@ export const InteractiveInspector: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto lg:max-w-none bg-white border border-[#E5E5E5] transition-all">
+    <div className="w-full max-w-xl mx-auto lg:max-w-none bg-white border border-[#E5E5E8] neu-card transition-all">
       {/* Top Bar */}
-      <div className="px-5 py-3.5 bg-[#F7F7F7] border-b border-[#E5E5E5] flex flex-wrap items-center justify-between gap-3">
+      <div className="px-5 py-3.5 bg-[#F5F5F7] border-b border-[#E5E5E8] neu-inset flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <span className="w-2 h-2 bg-[#0A0A0A]" />
           <span className="text-[11px] font-mono uppercase tracking-wider text-[#525252]">
@@ -28,12 +28,12 @@ export const InteractiveInspector: React.FC = () => {
         </div>
 
         {/* View Mode Switcher */}
-        <div className="flex items-center bg-white border border-[#E5E5E5] p-0.5 text-xs font-mono">
+        <div className="flex items-center bg-[#FAFAFA] border border-[#E5E5E8] p-1 neu-inset text-xs font-mono">
           <button
             onClick={() => setActiveTab('preview')}
-            className={`px-3 py-1 text-[11px] transition-colors ${
+            className={`px-3 py-1 text-[11px] uppercase transition-all ${
               activeTab === 'preview'
-                ? 'bg-[#0A0A0A] text-white font-medium'
+                ? 'bg-[#0A0A0A] text-white font-bold neu-pill shadow-xs'
                 : 'text-[#525252] hover:text-[#0A0A0A]'
             }`}
           >
@@ -41,9 +41,9 @@ export const InteractiveInspector: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('wireframe')}
-            className={`px-3 py-1 text-[11px] transition-colors ${
+            className={`px-3 py-1 text-[11px] uppercase transition-all ${
               activeTab === 'wireframe'
-                ? 'bg-[#0A0A0A] text-white font-medium'
+                ? 'bg-[#0A0A0A] text-white font-bold neu-pill shadow-xs'
                 : 'text-[#525252] hover:text-[#0A0A0A]'
             }`}
           >

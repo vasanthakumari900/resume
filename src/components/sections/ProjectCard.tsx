@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Project } from '../types';
+import type { Project } from '../../types';
 import { PralayaPreview, CertiSealPreview, AcademicPortalPreview } from './ProjectPreviews';
 import { ArrowRight, ArrowUpRight, Image as ImageIcon, Activity } from 'lucide-react';
 
@@ -53,13 +53,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="space-y-2">
         {/* Toggle Switcher */}
         <div className="flex items-center justify-between font-mono text-[10px] pb-1">
-          <span className="text-[#737373] uppercase tracking-wider">SURFACE VIEW</span>
-          <div className="flex items-center gap-1 border border-[#E5E5E5] p-0.5 bg-[#F7F7F7]">
+          <span className="text-[#737373] uppercase tracking-wider font-semibold">SURFACE VIEW</span>
+          <div className="flex items-center gap-1 border border-[#E5E5E8] p-1 bg-[#F5F5F7] neu-inset">
             <button
               onClick={() => setViewMode('screenshot')}
-              className={`px-2 py-0.5 flex items-center gap-1 uppercase transition-colors ${
+              className={`px-2.5 py-1 flex items-center gap-1 uppercase transition-all ${
                 viewMode === 'screenshot'
-                  ? 'bg-[#0A0A0A] text-white font-bold'
+                  ? 'bg-[#0A0A0A] text-white font-bold neu-pill shadow-xs'
                   : 'text-[#737373] hover:text-[#0A0A0A]'
               }`}
             >
@@ -68,9 +68,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             </button>
             <button
               onClick={() => setViewMode('interactive')}
-              className={`px-2 py-0.5 flex items-center gap-1 uppercase transition-colors ${
+              className={`px-2.5 py-1 flex items-center gap-1 uppercase transition-all ${
                 viewMode === 'interactive'
-                  ? 'bg-[#0A0A0A] text-white font-bold'
+                  ? 'bg-[#0A0A0A] text-white font-bold neu-pill shadow-xs'
                   : 'text-[#737373] hover:text-[#0A0A0A]'
               }`}
             >
@@ -82,7 +82,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         {/* Content Display */}
         {viewMode === 'screenshot' && screenshotUrl ? (
-          <div className="border border-[#0A0A0A] bg-[#0A0A0A] overflow-hidden">
+          <div className="border border-[#0A0A0A] bg-[#0A0A0A] neu-dark-inset overflow-hidden">
             <img
               src={screenshotUrl}
               alt={`${project.title} live interface`}
@@ -103,41 +103,41 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   if (isFeatured) {
     return (
-      <div className="group relative bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] transition-all duration-200">
+      <div className="group relative bg-white dark:bg-[#141414] border border-[#E5E5E8] dark:border-[#262626] hover:border-[#0A0A0A] dark:hover:border-neutral-500 neu-card transition-all duration-200">
         <div className="p-8 sm:p-10 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Project Editorial Info */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3 font-mono text-xs">
-                <span className="text-xl font-extrabold text-[#0A0A0A]">PROJECT {projectNumber}</span>
-                <span className="uppercase text-[#525252] font-semibold tracking-wider">{project.category}</span>
+              <div className="flex items-center justify-between border-b border-[#E5E5E5] dark:border-[#262626] pb-3 font-mono text-xs">
+                <span className="text-xl font-extrabold text-[#0A0A0A] dark:text-white font-display">PROJECT {projectNumber}</span>
+                <span className="uppercase text-[#525252] dark:text-[#A3A3A3] font-semibold tracking-wider">{project.category}</span>
               </div>
 
               <div>
-                <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0A0A0A] dark:text-white uppercase tracking-tight font-display">
                   {project.title}
                 </h3>
-                <p className="mt-1 text-xs font-mono text-[#525252]">
+                <p className="mt-1 text-xs font-mono text-[#525252] dark:text-[#A3A3A3]">
                   {project.subtitle}
                 </p>
               </div>
 
               {/* One-Line Description */}
               <div className="space-y-1">
-                <span className="text-[10px] font-mono uppercase text-[#737373] font-bold block">
+                <span className="text-[10px] font-mono uppercase text-[#737373] dark:text-[#A3A3A3] font-bold block">
                   PRODUCT OVERVIEW
                 </span>
-                <p className="text-sm text-[#525252] leading-relaxed">
+                <p className="text-sm text-[#525252] dark:text-[#D4D4D4] leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               {/* My Contribution - Recruiter highlight */}
-              <div className="p-4 bg-[#F7F7F7] border border-[#E5E5E5] space-y-1 font-mono text-xs">
-                <span className="text-[10px] text-[#737373] uppercase font-bold block">
+              <div className="p-4 bg-[#F7F7F9] dark:bg-[#0D0D0D] border border-[#E5E5E8] dark:border-[#222222] neu-inset space-y-1 font-mono text-xs">
+                <span className="text-[10px] text-[#737373] dark:text-[#A3A3A3] uppercase font-bold block">
                   MY CONTRIBUTION
                 </span>
-                <p className="text-xs text-[#0A0A0A] font-semibold leading-relaxed">
+                <p className="text-xs text-[#0A0A0A] dark:text-[#EDEDED] font-semibold leading-relaxed">
                   {myContribution}
                 </p>
               </div>
@@ -147,7 +147,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 {project.technologies.slice(0, 5).map((tech) => (
                   <span
                     key={tech}
-                    className="text-[10px] font-mono uppercase text-[#525252] bg-[#FAFAFA] px-2 py-0.5 border border-[#E5E5E5]"
+                    className="text-[10px] font-mono uppercase text-[#525252] dark:text-[#A3A3A3] bg-[#FAFAFA] dark:bg-[#1A1A1A] px-2 py-0.5 border border-[#E5E5E5] dark:border-[#2E2E2E] neu-pill"
                   >
                     {tech}
                   </span>
@@ -158,7 +158,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <div className="pt-2 flex flex-wrap items-center gap-6 font-mono text-xs">
                 <button
                   onClick={() => onOpenCaseStudy(project.id)}
-                  className="group/btn inline-flex items-center gap-2 px-5 py-3 bg-[#0A0A0A] text-white hover:bg-neutral-800 transition-colors uppercase tracking-wider font-semibold"
+                  className="group/btn inline-flex items-center gap-2 px-5 py-3 bg-[#0A0A0A] dark:bg-white text-white dark:text-[#0A0A0A] hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all uppercase tracking-wider font-semibold neu-btn"
                 >
                   <span>VIEW CASE STUDY</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/btn:translate-x-1" />
@@ -168,7 +168,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[#0A0A0A] hover:underline underline-offset-4 font-bold"
+                  className="flex items-center gap-1 text-[#0A0A0A] dark:text-white hover:underline underline-offset-4 font-bold"
                 >
                   <span>LIVE PLATFORM</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -178,7 +178,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[#737373] hover:text-[#0A0A0A] hover:underline underline-offset-4"
+                  className="flex items-center gap-1 text-[#737373] dark:text-[#A3A3A3] hover:text-[#0A0A0A] dark:hover:text-white hover:underline underline-offset-4"
                 >
                   <span>GITHUB</span>
                   <ArrowUpRight className="w-3 h-3" />
@@ -196,33 +196,33 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
   // Secondary Asymmetric Project Card (02 & 03)
   return (
-    <div className="group bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] transition-all duration-200 flex flex-col justify-between">
+    <div className="group bg-white dark:bg-[#141414] border border-[#E5E5E8] dark:border-[#262626] hover:border-[#0A0A0A] dark:hover:border-neutral-500 neu-card transition-all duration-200 flex flex-col justify-between">
       <div className="p-8 space-y-5">
-        <div className="flex items-center justify-between border-b border-[#E5E5E5] pb-3 font-mono text-xs">
-          <span className="text-base font-extrabold text-[#0A0A0A]">PROJECT {projectNumber}</span>
-          <span className="uppercase text-[#737373] tracking-wider text-[11px] font-semibold">{project.category}</span>
+        <div className="flex items-center justify-between border-b border-[#E5E5E5] dark:border-[#262626] pb-3 font-mono text-xs">
+          <span className="text-base font-extrabold text-[#0A0A0A] dark:text-white font-display">PROJECT {projectNumber}</span>
+          <span className="uppercase text-[#737373] dark:text-[#A3A3A3] tracking-wider text-[11px] font-semibold">{project.category}</span>
         </div>
 
         <div>
-          <h3 className="text-2xl font-extrabold text-[#0A0A0A] uppercase tracking-tight">
+          <h3 className="text-2xl font-extrabold text-[#0A0A0A] dark:text-white uppercase tracking-tight font-display">
             {project.title}
           </h3>
-          <p className="mt-1 text-xs font-mono text-[#525252]">
+          <p className="mt-1 text-xs font-mono text-[#525252] dark:text-[#A3A3A3]">
             {project.subtitle}
           </p>
         </div>
 
         {/* Product Overview */}
-        <p className="text-xs sm:text-sm text-[#525252] leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#525252] dark:text-[#D4D4D4] leading-relaxed">
           {project.description}
         </p>
 
         {/* My Contribution */}
-        <div className="p-3.5 bg-[#F7F7F7] border border-[#E5E5E5] space-y-1 font-mono text-xs">
-          <span className="text-[10px] text-[#737373] uppercase font-bold block">
+        <div className="p-3.5 bg-[#F7F7F9] dark:bg-[#0D0D0D] border border-[#E5E5E8] dark:border-[#222222] neu-inset space-y-1 font-mono text-xs">
+          <span className="text-[10px] text-[#737373] dark:text-[#A3A3A3] uppercase font-bold block">
             MY CONTRIBUTION
           </span>
-          <p className="text-xs text-[#0A0A0A] font-medium leading-relaxed">
+          <p className="text-xs text-[#0A0A0A] dark:text-[#EDEDED] font-medium leading-relaxed">
             {myContribution}
           </p>
         </div>
@@ -235,7 +235,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           {project.technologies.slice(0, 4).map((tech) => (
             <span
               key={tech}
-              className="text-[10px] font-mono uppercase text-[#737373] bg-[#FAFAFA] px-2 py-0.5 border border-[#E5E5E5]"
+              className="text-[10px] font-mono uppercase text-[#737373] dark:text-[#A3A3A3] bg-[#FAFAFA] dark:bg-[#1A1A1A] px-2 py-0.5 border border-[#E5E5E5] dark:border-[#2E2E2E]"
             >
               {tech}
             </span>
@@ -244,10 +244,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Card Footer Actions */}
-      <div className="px-8 py-4 bg-[#FAFAFA] border-t border-[#E5E5E5] flex items-center justify-between font-mono text-xs">
+      <div className="px-8 py-4 bg-[#FAFAFA] dark:bg-[#121212] border-t border-[#E5E5E5] dark:border-[#262626] flex items-center justify-between font-mono text-xs">
         <button
           onClick={() => onOpenCaseStudy(project.id)}
-          className="group/link inline-flex items-center gap-1.5 font-bold uppercase text-[#0A0A0A] hover:underline underline-offset-4"
+          className="group/link inline-flex items-center gap-1.5 font-bold uppercase text-[#0A0A0A] dark:text-white hover:underline underline-offset-4"
         >
           <span>VIEW CASE STUDY</span>
           <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
@@ -257,7 +257,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1 text-[#737373] hover:text-[#0A0A0A] hover:underline underline-offset-4"
+          className="flex items-center gap-1 text-[#737373] dark:text-[#A3A3A3] hover:text-[#0A0A0A] dark:hover:text-white hover:underline underline-offset-4"
         >
           <span>LIVE PLATFORM</span>
           <ArrowUpRight className="w-3 h-3" />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { PERSONAL_INFO } from '../../data/portfolioData';
 import { ArrowUpRight, ArrowRight, Check, Copy } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { GithubIcon, LinkedinIcon } from '../common/Icons';
 
 export const Contact: React.FC = () => {
   const [copied, setCopied] = useState(false);

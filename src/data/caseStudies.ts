@@ -19,6 +19,58 @@ export interface CaseStudyScreenshot {
   caption: string;
 }
 
+export interface WireframeArtifact {
+  title: string;
+  summary: string;
+  gridSystem: string;
+  density: string;
+  zones: {
+    id: string;
+    name: string;
+    role: string;
+    spatialSpecs: string;
+    rationale: string;
+  }[];
+  uxPrinciples: {
+    principle: string;
+    application: string;
+  }[];
+}
+
+export interface UserFlowArtifact {
+  title: string;
+  userGoal: string;
+  stages: {
+    stepNumber: string;
+    stageName: string;
+    actorAction: string;
+    systemProcess: string;
+    uiFeedback: string;
+    edgeCase?: string;
+  }[];
+  benchmarkMetric: string;
+}
+
+export interface DesignSystemArtifact {
+  title: string;
+  typography: {
+    token: string;
+    spec: string;
+    usage: string;
+  }[];
+  colorPalette: {
+    token: string;
+    hex: string;
+    role: string;
+    contrast: string;
+  }[];
+  componentTokens: {
+    component: string;
+    states: string;
+    specs: string;
+  }[];
+}
+
 export interface CaseStudyData {
   projectId: string;
   number: string;
@@ -30,6 +82,9 @@ export interface CaseStudyData {
   githubUrl: string;
   atAGlance: CaseStudyAtAGlance;
   screenshots: CaseStudyScreenshot[];
+  wireframe?: WireframeArtifact;
+  userFlow?: UserFlowArtifact;
+  designSystem?: DesignSystemArtifact;
   summary: string;
   theContext: string;
   theProblem: {
@@ -91,6 +146,181 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         caption: 'Interactive stress test engine allowing operators to perturb continuous rainfall duration (+50%) and simulate slope stability across regional sectors.',
       },
     ],
+    wireframe: {
+      title: 'OPERATIONS COMMAND CENTRE — SPATIAL WIREFRAME BLUEPRINT',
+      summary:
+        'A high-density single-screen cockpit architecture engineered to prevent operator cognitive overload during monsoon flash hazard events.',
+      gridSystem: '12-Column Responsive Spatial Grid · 8px Baseline Rhythm',
+      density: 'High Density Command Matrix · Zero-Scroll Critical Viewport',
+      zones: [
+        {
+          id: '01',
+          name: 'GLOBAL COMMAND BAR',
+          role: 'Header & Incident Status',
+          spatialSpecs: 'Full Width (12-Col) · Height 56px · Persistent Top Anchor',
+          rationale:
+            'Displays UTC timecode, active emergency severity, and multi-sector toggle (Nilgiris, Wayanad, Idukki) within instant peripheral vision.',
+        },
+        {
+          id: '02',
+          name: 'GIS HAZARD VIEWPORT',
+          role: 'Primary Geospatial Canvas',
+          spatialSpecs: '8-Col Desktop Canvas · Interactive Height 580px',
+          rationale:
+            'Renders Leaflet GIS map with terrain contour overlays, WGS84 coordinate projections, and dynamic color-coded hazard zones.',
+        },
+        {
+          id: '03',
+          name: 'LIVE SENSOR TELEMETRY DOCK',
+          role: 'Environmental Gauge Stack',
+          spatialSpecs: '4-Col Right Rail · Responsive Scroll Tray',
+          rationale:
+            'Monitors precipitation (24h cumulative mm), soil saturation pore pressure, and inclinometer slope shift rate in real time.',
+        },
+        {
+          id: '04',
+          name: 'XAI FEATURE ATTRIBUTION DRAWER',
+          role: 'Transparent Model Explainer',
+          spatialSpecs: 'Collapsible Bottom Drawer · 12-Col Dock',
+          rationale:
+            'Explains Random Forest classification drivers so operators see why slope risk was flagged, satisfying explainability requirements.',
+        },
+      ],
+      uxPrinciples: [
+        {
+          principle: "Fitts's Law Target Sizing",
+          application:
+            'Emergency sector switchers and alert triggers are sized with minimum 48px hit areas placed at top-left edge anchors for rapid acquisition.',
+        },
+        {
+          principle: "Miller's Law (Chunking)",
+          application:
+            'Heterogeneous telemetry is grouped into 3 distinct cognitive chunks: Atmospheric, Subsurface Geotechnical, and Topographic Hazard.',
+        },
+        {
+          principle: 'Progressive Disclosure',
+          application:
+            'Detailed mathematical sensor telemetry is tucked behind drill-down drawers, keeping the primary viewport clear of clutter.',
+        },
+      ],
+    },
+    userFlow: {
+      title: 'EARLY WARNING & INCIDENT TRIAGE USER FLOW',
+      userGoal:
+        'Rapidly identify high-risk landslide sectors, inspect environmental telemetry, verify AI attribution, and issue sector advisories in under 45 seconds.',
+      benchmarkMetric: 'Target Triage Latency: < 45 seconds from flash rainfall alert to dispatched protocol',
+      stages: [
+        {
+          stepNumber: '01',
+          stageName: 'ALERT TRIGGER',
+          actorAction: 'Operator monitors Command Overview when automated rainfall threshold exceeds 120mm/24h.',
+          systemProcess: 'Event listener triggers priority alert state from backend FastAPI stream.',
+          uiFeedback: 'Pulsing alert indicator appears on Global Command Bar with visual severity badge.',
+        },
+        {
+          stepNumber: '02',
+          stageName: 'SECTOR ISOLATION',
+          actorAction: 'Operator clicks Wayanad Sector hotspot pin on the Leaflet GIS canvas.',
+          systemProcess: 'GIS viewport pans smoothly to sector coordinates (11.6854° N, 76.1320° E) and zooms to Level 13.',
+          uiFeedback: 'Map viewport focuses on sector bounding box; telemetry dock highlights real-time sensors.',
+        },
+        {
+          stepNumber: '03',
+          stageName: 'TELEMETRY INSPECTION',
+          actorAction: 'Operator scrubs the 48-hour precipitation trendline and soil pore saturation gauge.',
+          systemProcess: 'Client-side chart queries historical rolling averages and displays inflection points.',
+          uiFeedback: 'Soil saturation gauge displays 87.4% (Threshold: 80%); trendline glows with alert boundary.',
+        },
+        {
+          stepNumber: '04',
+          stageName: 'AI ATTRIBUTION VERIFICATION',
+          actorAction: 'Operator expands the Explainable AI (XAI) feature attribution drawer.',
+          systemProcess: 'Random Forest model computes SHAP feature importance percentages.',
+          uiFeedback: 'Horizontal bar graph surfaces: Rainfall 52%, Slope Angle 28%, Soil Moisture 20%.',
+        },
+        {
+          stepNumber: '05',
+          stageName: 'DECISION & PROTOCOL DISPATCH',
+          actorAction: 'Operator validates predictive hazard and clicks "DISPATCH ADVISORY" button.',
+          systemProcess: 'REST API payload broadcasts emergency webhook to district authorities.',
+          uiFeedback: 'Advisory status changes to "DISPATCHED" with cryptographic confirmation log.',
+        },
+      ],
+    },
+    designSystem: {
+      title: 'OPERATIONS MONOCHROME & TELEMETRY DESIGN SYSTEM',
+      typography: [
+        {
+          token: 'Display Large',
+          spec: '32px / 1.1 · JetBrains Mono · Bold · Uppercase',
+          usage: 'Sector alerts, primary risk index numbers, hazard codes',
+        },
+        {
+          token: 'Heading UI',
+          spec: '16px / 1.3 · Plus Jakarta Sans · Extrabold · Uppercase',
+          usage: 'Panel headers, drawer labels, section titles',
+        },
+        {
+          token: 'Telemetry Meta',
+          spec: '11px / 1.4 · JetBrains Mono · Medium',
+          usage: 'Coordinates, sensor timestamps, WGS84 projections',
+        },
+        {
+          token: 'Body Interface',
+          spec: '13px / 1.5 · Plus Jakarta Sans · Regular',
+          usage: 'Incident descriptions, operator notes, advisory copy',
+        },
+      ],
+      colorPalette: [
+        {
+          token: 'Void Black',
+          hex: '#0A0A0A',
+          role: 'Primary command surface, text headers, active state fills',
+          contrast: '21:1 (WCAG AAA)',
+        },
+        {
+          token: 'Card Surface',
+          hex: '#FFFFFF',
+          role: 'Tactile card background, popover containers',
+          contrast: 'Base Light',
+        },
+        {
+          token: 'Recessed Inset',
+          hex: '#F7F7F9',
+          role: 'Telemetry wells, map frame inset, code viewports',
+          contrast: 'Subtle Depth',
+        },
+        {
+          token: 'Subtle Hairline',
+          hex: '#E5E5E8',
+          role: 'Structural division borders, grid dividers',
+          contrast: 'Optical Separation',
+        },
+        {
+          token: 'Muted Label',
+          hex: '#737373',
+          role: 'Metadata labels, unit metrics, secondary captions',
+          contrast: '4.8:1 (WCAG AA)',
+        },
+      ],
+      componentTokens: [
+        {
+          component: 'Tactile Telemetry Card',
+          states: 'Default (neu-card) ➔ Hover (lift + shadow) ➔ Alert Active (solid border)',
+          specs: 'Padding 16px · Border 1px #E8E8E8 · Radius 0px · Dual-diffused shadows',
+        },
+        {
+          component: 'Segmented Mode Pill',
+          states: 'Default (inset well) ➔ Active (tactile black fill, white text)',
+          specs: 'Padding 4px 10px · Monospace font · 10px size · Radius 2px',
+        },
+        {
+          component: 'Inset Map Viewport',
+          states: 'Recessed well (neu-dark-inset) · Persistent coordinate overlay',
+          specs: 'Border 1px #222222 · Background #0F0F0F · Dual inset shadows',
+        },
+      ],
+    },
     summary:
       'PRALAYA AI is an AI-powered disaster intelligence platform engineered to assess landslide risk through environmental telemetry and geospatial visualization, structured as a high-density operations centre interface.',
     theContext:
@@ -262,6 +492,174 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         caption: 'Operational trust workspace displaying granular verification breakdown across institutional identity, KMS, signature, and ledger continuity.',
       },
     ],
+    wireframe: {
+      title: 'TRUST VERIFICATION WORKSPACE — SPATIAL WIREFRAME BLUEPRINT',
+      summary:
+        'A friction-free verification cockpit designed to replace vague pass/fail screens with a transparent 4-stage validation progression.',
+      gridSystem: '8-Column Centered Flow · Responsive Micro-Breakpoints',
+      density: 'Medium Density · Progressive Clarity Layout',
+      zones: [
+        {
+          id: '01',
+          name: 'PROGRESSIVE STEPPER HEADER',
+          role: 'Verification Stage Indicator',
+          spatialSpecs: 'Full Width Centered · Height 64px · Step Node Connector',
+          rationale:
+            'Shows exact verification milestones (Ingestion ➔ OCR/Layout ➔ Cryptographic Proof ➔ Final Verdict) to eliminate user uncertainty.',
+        },
+        {
+          id: '02',
+          name: 'INGESTION TARGET DOCK',
+          role: 'Credential Input & Drop Zone',
+          spatialSpecs: '8-Col Center · Tactile Inset Well · Min-Height 220px',
+          rationale:
+            'Large tactile drop target with single-click pre-seeded test certificates for immediate employer evaluation.',
+        },
+        {
+          id: '03',
+          name: '8-LEVEL EVIDENCE BREAKDOWN',
+          role: 'Granular Inspection Matrix',
+          spatialSpecs: '2-Col Split Cards · Responsive Stack · Padding 16px',
+          rationale:
+            'Breaks verification down into discrete verifiable components: Issuer identity, KMS envelope, Ed25519 signature, and blockchain ledger continuity.',
+        },
+        {
+          id: '04',
+          name: 'DEFINITIVE VERDICT BANNER',
+          role: 'Trust Conclusion & Action Hub',
+          spatialSpecs: 'Full Width Card · Tactile Raised Neumorphic Surface',
+          rationale:
+            'Delivers an unequivocal verdict (VERIFIED / TAMPER_DETECTED) with verifiable cryptographic hashes.',
+        },
+      ],
+      uxPrinciples: [
+        {
+          principle: 'Mental Model Alignment',
+          application:
+            'Mirrors official registrar physical verification workflows through an intuitive digital evidence binder.',
+        },
+        {
+          principle: 'Error Prevention & Recovery',
+          application:
+            'Replaces cryptic error codes with actionable explanations (e.g. Signature mismatch on line 4 vs. Registry Record).',
+        },
+        {
+          principle: 'Aesthetic-Usability Effect',
+          application:
+            'Clean tactile typography and high-contrast borders communicate cryptographic authority and reliability.',
+        },
+      ],
+    },
+    userFlow: {
+      title: 'CREDENTIAL VERIFICATION & EVIDENCE AUDIT USER FLOW',
+      userGoal:
+        'Verify the authenticity of an academic certificate, inspect cryptographic proofs, and generate an audit certificate in under 15 seconds.',
+      benchmarkMetric: 'Verification Turnaround: < 12 seconds with full 8-point evidence chain',
+      stages: [
+        {
+          stepNumber: '01',
+          stageName: 'INPUT INGESTION',
+          actorAction: 'Employer or recruiter drops a certificate PDF or selects pre-seeded Demo ID #CX-9042.',
+          systemProcess: 'Client-side parser reads file metadata, extracts SHA-256 hash, and initializes verification stepper.',
+          uiFeedback: 'Drop zone transitions to active pulse; Stepper node 1 marks as completed with checkmark.',
+        },
+        {
+          stepNumber: '02',
+          stageName: 'STRUCTURAL PARSING',
+          actorAction: 'User observes automated layout and typography consistency checks.',
+          systemProcess: 'AI document inspection validates institutional seal, font geometry, and credential issuance date.',
+          uiFeedback: 'Visual scan bar passes across document preview; 3 structural checks show PASS.',
+        },
+        {
+          stepNumber: '03',
+          stageName: 'CRYPTOGRAPHIC AUDIT',
+          actorAction: 'User reviews live cryptographic signature validation.',
+          systemProcess: 'System queries Ed25519 public key registry and decrypts KMS data envelope.',
+          uiFeedback: 'Evidence matrix lights up with green checkmark: Key ID #ED-VAISHNAV-01 verified.',
+        },
+        {
+          stepNumber: '04',
+          stageName: 'VERDICT CONFIRMATION',
+          actorAction: 'User inspects final conclusive credential status.',
+          systemProcess: 'Verification engine packages the 8 evidence items into an exportable audit record.',
+          uiFeedback: 'Tactile VERIFIED badge appears with digital timestamp and printable summary CTA.',
+        },
+      ],
+    },
+    designSystem: {
+      title: 'CREDENTIAL TRUST & SECURITY DESIGN SYSTEM',
+      typography: [
+        {
+          token: 'Display Trust',
+          spec: '28px / 1.1 · JetBrains Mono · Extrabold · Uppercase',
+          usage: 'VERIFIED / TAMPER status badges, credential serial IDs',
+        },
+        {
+          token: 'Section Header',
+          spec: '15px / 1.3 · Plus Jakarta Sans · Bold · Tracking +0.05em',
+          usage: 'Evidence chain titles, verification stepper labels',
+        },
+        {
+          token: 'Crypto Monospace',
+          spec: '11px / 1.4 · JetBrains Mono · Regular',
+          usage: 'Public key fingerprints, SHA-256 hashes, timestamp logs',
+        },
+        {
+          token: 'Interface Label',
+          spec: '12px / 1.5 · Plus Jakarta Sans · Medium',
+          usage: 'Evidence item descriptions, registrar authority credentials',
+        },
+      ],
+      colorPalette: [
+        {
+          token: 'Ink Black',
+          hex: '#0A0A0A',
+          role: 'Primary borders, dark buttons, high-priority status',
+          contrast: '21:1 (WCAG AAA)',
+        },
+        {
+          token: 'Pristine White',
+          hex: '#FFFFFF',
+          role: 'Primary document card background',
+          contrast: 'Base Surface',
+        },
+        {
+          token: 'Tactile Neutral',
+          hex: '#F7F7F9',
+          role: 'Drop zone inset well, evidence item cards',
+          contrast: 'Subtle Recess',
+        },
+        {
+          token: 'Trust Border',
+          hex: '#E5E5E8',
+          role: 'Structural dividing lines, stepper connectors',
+          contrast: 'Optical Border',
+        },
+        {
+          token: 'Certified Accent',
+          hex: '#0A0A0A',
+          role: 'Monochrome stamp of authenticity',
+          contrast: 'Max Contrast',
+        },
+      ],
+      componentTokens: [
+        {
+          component: 'Tactile Evidence Row',
+          states: 'Default (neu-flat) ➔ Verified (crisp border + checkmark) ➔ Active Drill-down',
+          specs: 'Padding 12px 16px · Inset border · JetBrains Mono metadata',
+        },
+        {
+          component: 'Verification Status Badge',
+          states: 'Raised Pill · High contrast · Inset text styling',
+          specs: 'Padding 6px 14px · Uppercase · 11px font · Inset tactile border',
+        },
+        {
+          component: 'Drop Target Well',
+          states: 'Idle (neu-inset) ➔ Drag Over (high contrast dashed border)',
+          specs: 'Border 1.5px dashed #0A0A0A · Background #F7F7F9 · Tactile depth',
+        },
+      ],
+    },
     summary:
       'CERTISEAL (CERTX) is a digital credential verification platform built to help academic institutions, employers, and certifiers detect document manipulation through a structured multi-level verification experience.',
     theContext:
@@ -408,6 +806,174 @@ export const CASE_STUDIES: Record<string, CaseStudyData> = {
         caption: 'Responsive authentication state with roll number verification, academic year routing, and instant demo access.',
       },
     ],
+    wireframe: {
+      title: 'CENTRALIZED ACADEMIC HUB — SPATIAL WIREFRAME BLUEPRINT',
+      summary:
+        'A 2-click information architecture designed to eliminate collegiate resource hunting across disconnected message boards and messaging groups.',
+      gridSystem: '12-Column Flexible Grid · Mobile-First Responsive Breakpoints',
+      density: 'Ergonomic Layout · Touch Target Optimized (48px+)',
+      zones: [
+        {
+          id: '01',
+          name: 'INSTANT SEARCH & SEMESTER BAR',
+          role: 'Filter & Search Navigation',
+          spatialSpecs: 'Full Width Sticky · Height 52px · Instant Semester Selector',
+          rationale:
+            'Allows students to instantly toggle between Semesters (I–VI) and filter by Subject in one gesture without page reloads.',
+        },
+        {
+          id: '02',
+          name: 'SUBJECT MODULE SHELF',
+          role: 'Primary Curriculum Grid',
+          spatialSpecs: '8-Col Desktop / 12-Col Mobile · 3-Col Card Matrix',
+          rationale:
+            'Cards provide quick visual roadmaps for Core subjects: Algorithms, DBMS, Web Architecture, and Operating Systems.',
+        },
+        {
+          id: '03',
+          name: 'DIRECT RESOURCE REPOSITORY DOCK',
+          role: 'Actionable Resource Downloads',
+          spatialSpecs: '4-Col Desktop / Bottom Sheet Mobile · Slide-out Drawer',
+          rationale:
+            'Direct 1-click access to lecture slide decks, syllabus PDFs, and lab code repositories without nested navigation traps.',
+        },
+        {
+          id: '04',
+          name: 'DEPARTMENT BROADCAST NOTICE',
+          role: 'Timely Academic Announcements',
+          spatialSpecs: 'Top Notification Banner · Compact 40px · High Contrast',
+          rationale:
+            'Surfaces urgent submission deadlines and lab schedule changes immediately upon landing.',
+        },
+      ],
+      uxPrinciples: [
+        {
+          principle: '2-Click Resource Rule',
+          application:
+            'Students can reach any semester module document from the home screen in a maximum of two clicks.',
+        },
+        {
+          principle: 'Mobile-First Ergonomics',
+          application:
+            'All primary filter chips and download buttons are placed within the natural thumb zone on mobile screens.',
+        },
+        {
+          principle: 'Recognition Over Recall',
+          application:
+            'Course icons, subject codes, and visual category badges eliminate guesswork for syllabus searching.',
+        },
+      ],
+    },
+    userFlow: {
+      title: 'STUDENT STUDY RESOURCE RETRIEVAL USER FLOW',
+      userGoal:
+        'Locate specific practical lab code exercises and syllabus roadmaps for upcoming lab exam in under 10 seconds.',
+      benchmarkMetric: 'Retrieval Speed: < 8 seconds from landing to GitHub lab repository code',
+      stages: [
+        {
+          stepNumber: '01',
+          stageName: 'PORTAL ARRIVAL',
+          actorAction: 'Student opens CS Portal on smartphone via campus network.',
+          systemProcess: 'Client loads lightweight bundle (<100kB gzip) instantly without waiting on backend database.',
+          uiFeedback: 'Clean editorial dashboard renders; current Semester VI subjects auto-selected.',
+        },
+        {
+          stepNumber: '02',
+          stageName: 'SUBJECT SELECTION',
+          actorAction: 'Student taps "Web Architecture & React" subject card.',
+          systemProcess: 'Portal updates state view and expands modular topic shelf.',
+          uiFeedback: 'Card lifts with tactile neomorphic shadow; modules 1 through 5 unfold smoothly.',
+        },
+        {
+          stepNumber: '03',
+          stageName: 'RESOURCE FILTERING',
+          actorAction: 'Student taps "LAB REPOSITORIES" filter pill.',
+          systemProcess: 'Client-side filter isolates practical programming exercises from lecture slide decks.',
+          uiFeedback: 'Filter pill depresses with tactile inset styling; 4 lab code modules display.',
+        },
+        {
+          stepNumber: '04',
+          stageName: 'ONE-CLICK RETRIEVAL',
+          actorAction: 'Student clicks "VIEW CODE REPOSITORY" link.',
+          systemProcess: 'Direct URL routes to official department GitHub repository.',
+          uiFeedback: 'Target repository opens in new tab with zero interim download gateways.',
+        },
+      ],
+    },
+    designSystem: {
+      title: 'STUDENT PORTAL & CURRICULUM DESIGN SYSTEM',
+      typography: [
+        {
+          token: 'Subject Title',
+          spec: '20px / 1.2 · Plus Jakarta Sans · Bold · Uppercase',
+          usage: 'Course names, syllabus headers, module titles',
+        },
+        {
+          token: 'Course Code',
+          spec: '11px / 1.3 · JetBrains Mono · Bold',
+          usage: 'Subject alphanumeric identifiers (e.g. CS602, CS401)',
+        },
+        {
+          token: 'Resource Label',
+          spec: '12px / 1.4 · Plus Jakarta Sans · Semi-Bold',
+          usage: 'Download links, lab repository labels, notice alerts',
+        },
+        {
+          token: 'Notice Meta',
+          spec: '10px / 1.4 · JetBrains Mono · Medium',
+          usage: 'Submission deadlines, circular numbers, timestamps',
+        },
+      ],
+      colorPalette: [
+        {
+          token: 'Deep Obsidian',
+          hex: '#0A0A0A',
+          role: 'Brand typography, active semester pill, prominent buttons',
+          contrast: '21:1 (WCAG AAA)',
+        },
+        {
+          token: 'Clean Canvas',
+          hex: '#FFFFFF',
+          role: 'Primary subject card background',
+          contrast: 'High Legibility',
+        },
+        {
+          token: 'Recessed Tray',
+          hex: '#FAFAFA',
+          role: 'Resource list well, shelf container background',
+          contrast: 'Soft Separation',
+        },
+        {
+          token: 'Hairline Divider',
+          hex: '#EAEAEA',
+          role: 'Module dividers, card borders',
+          contrast: 'Minimal Footprint',
+        },
+        {
+          token: 'Subtle Charcoal',
+          hex: '#525252',
+          role: 'Resource descriptions, secondary syllabus notes',
+          contrast: '7.1:1 (WCAG AAA)',
+        },
+      ],
+      componentTokens: [
+        {
+          component: 'Tactile Subject Card',
+          states: 'Idle (neu-card) ➔ Hover (subtle lift + shadow expansion) ➔ Selected',
+          specs: 'Padding 20px · Border 1px #E8E8E8 · Clean typographic hierarchy',
+        },
+        {
+          component: 'Semester Filter Pill',
+          states: 'Idle (flat border) ➔ Pressed Active (neu-btn-active inset well)',
+          specs: 'Padding 6px 14px · Monospace · Instant state transition',
+        },
+        {
+          component: 'Resource Download Chip',
+          states: 'Compact pill with arrow icon ➔ Hover underline',
+          specs: 'Padding 6px 12px · Background #FAFAFA · Border 1px #E5E5E5',
+        },
+      ],
+    },
     summary:
       'A centralized academic platform created for the Department of Computer Science at DG Vaishnav College to organize course syllabi, lab repositories, study modules, and departmental notices into an intuitive, student-focused hub.',
     theContext:
