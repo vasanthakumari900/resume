@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { Navbar, Footer, ScrollProgressBar } from './components/common';
 import {
   Hero,
-  SelectedWork,
   About,
   Skills,
+  SelectedWork,
   ExperienceTimeline,
   Education,
   Certifications,
   Leadership,
+  ResumeSection,
   Contact,
 } from './components/sections';
 import { CaseStudyModal, ResumeModal, RecruiterScanModal } from './components/modals';
+import { LoadingScreen, CustomCursor } from './components/ui';
 
 export const App: React.FC = () => {
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState<string | null>(null);
@@ -19,26 +21,55 @@ export const App: React.FC = () => {
   const [isRecruiterScanOpen, setIsRecruiterScanOpen] = useState<boolean>(false);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] text-[#0A0A0A] dark:text-[#EDEDED] font-sans selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-[#0A0A0A] antialiased transition-colors duration-200">
-      {/* 2px Minimal Top Scroll Progress Bar */}
+    <div className="min-h-screen bg-white dark:bg-[#060608] text-[#0A0A0A] dark:text-[#EDEDED] font-sans selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-[#0A0A0A] antialiased transition-colors duration-200">
+      {/* Intro Loading Sequence */}
+      <LoadingScreen />
+
+      {/* Subtle Desktop Interactive Custom Cursor */}
+      <CustomCursor />
+
+      {/* Top Minimal Scroll Progress Bar */}
       <ScrollProgressBar />
 
-      {/* Editorial Monochrome Navigation with Theme Switcher & Recruiter Scan */}
+      {/* Global Navigation with Theme Switcher, Recruiter Scan & Resume Triggers */}
       <Navbar
         onOpenResume={() => setIsResumeOpen(true)}
         onOpenRecruiterScan={() => setIsRecruiterScanOpen(true)}
       />
 
-      {/* Main Content Sections */}
+      {/* Main 3D Digital Workspace Sections */}
       <main>
+        {/* 1. Hero — 3D Developer Workspace */}
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <SelectedWork onOpenCaseStudy={(id) => setSelectedCaseStudyId(id)} />
+
+        {/* 2. About — Holographic Profile */}
         <About />
+
+        {/* 3. Skills — 3D Technology Core */}
         <Skills />
+
+        {/* 4. Projects — 3D Project Universe */}
+        <SelectedWork onOpenCaseStudy={(id) => setSelectedCaseStudyId(id)} />
+
+        {/* 5. Journey — 3D Career & Learning Timeline */}
         <ExperienceTimeline />
+
+        {/* 6. Education — Academic Performance */}
         <Education />
+
+        {/* 7. Certifications & Industry Simulations */}
         <Certifications />
+
+        {/* 8. Leadership & Campus Initiatives */}
         <Leadership />
+
+        {/* 9. Resume — 3D Digital Document */}
+        <ResumeSection
+          onOpenResume={() => setIsResumeOpen(true)}
+          onOpenRecruiterScan={() => setIsRecruiterScanOpen(true)}
+        />
+
+        {/* 10. Contact — 3D Digital Communication Hub */}
         <Contact />
       </main>
 

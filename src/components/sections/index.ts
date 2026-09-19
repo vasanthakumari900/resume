@@ -8,6 +8,7 @@ export { ExperienceTimeline } from './ExperienceTimeline';
 export { Education } from './Education';
 export { Certifications } from './Certifications';
 export { Leadership } from './Leadership';
+export { ResumeSection } from './ResumeSection';
 export { Contact } from './Contact';
 export { InteractiveInspector } from './InteractiveInspector';
 export { BeforeAfterSlider } from './BeforeAfterSlider';
