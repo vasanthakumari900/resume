@@ -74,9 +74,8 @@ export const About: React.FC = () => {
 
     scene.add(avatarGroup);
 
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = performance.now() * 0.001;
       avatarGroup.rotation.y = elapsed * 0.45;
       avatarGroup.rotation.x = Math.sin(elapsed * 0.5) * 0.25;
       avatarGroup.position.y = Math.sin(elapsed * 1.4) * 0.08;

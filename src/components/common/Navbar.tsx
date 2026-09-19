@@ -5,9 +5,20 @@ import { Menu, X, Sun, Moon, Zap } from 'lucide-react';
 interface NavbarProps {
   onOpenResume: () => void;
   onOpenRecruiterScan: () => void;
+  activeStation?: string;
+  onSelectStation?: (stationId: string) => void;
+  is3DMode?: boolean;
+  onToggleViewMode?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterScan }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenResume,
+  onOpenRecruiterScan,
+  activeStation: controlledActiveStation,
+  onSelectStation,
+  is3DMode = true,
+  onToggleViewMode,
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -73,9 +84,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterSca
     { label: 'CONTACT', href: '#contact', id: 'contact' },
   ];
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const effectiveActiveSection = controlledActiveStation || activeSection;
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, linkId: string, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    if (onSelectStation) {
+      onSelectStation(linkId);
+    }
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -97,6 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterSca
             href="#"
             onClick={(e) => {
               e.preventDefault();
+              if (onSelectStation) onSelectStation('hero');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="flex items-center gap-3 group"
@@ -105,19 +122,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterSca
               {PERSONAL_INFO.name}
             </span>
             <span className="hidden sm:inline-block text-[11px] font-mono text-[#737373] dark:text-[#A3A3A3] tracking-wider uppercase pl-2 border-l border-[#E5E5E5] dark:border-[#333333]">
-              UI/UX & Product Design
+              3D Digital World
             </span>
           </a>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive = effectiveActiveSection === link.id;
               return (
                 <a
                   key={link.id}
                   href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
+                  onClick={(e) => scrollToSection(e, link.id, link.href)}
                   className={`text-xs font-mono tracking-wider transition-colors duration-150 relative py-1 ${
                     isActive
                       ? 'text-[#0A0A0A] dark:text-white font-bold after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1.5px] after:bg-[#0A0A0A] dark:after:bg-white'
@@ -130,8 +147,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterSca
             })}
           </nav>
 
-          {/* Action Buttons: 60s Recruiter Scan + Theme Switcher + View Resume */}
+          {/* Action Buttons: 3D/2D Mode + 60s Recruiter Scan + Theme Switcher + View Resume */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* 3D / 2D Mode Switcher */}
+            {onToggleViewMode && (
+              <button
+                onClick={onToggleViewMode}
+                className="px-3 py-1.5 text-xs font-mono tracking-wider font-bold uppercase bg-white dark:bg-[#141414] border border-[#0A0A0A] dark:border-[#38bdf8] text-[#0A0A0A] dark:text-white neu-pill hover:scale-[1.02] active:scale-[0.98] transition-all"
+                title="Toggle between 3D World and 2D Scan"
+              >
+                <span>{is3DMode ? '2D SCAN' : '3D WORLD'}</span>
+              </button>
+            )}
+
             {/* 60s Recruiter Scan Button */}
             <button
               onClick={onOpenRecruiterScan}
@@ -198,7 +226,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenResume, onOpenRecruiterSca
               <a
                 key={link.id}
                 href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
+                onClick={(e) => scrollToSection(e, link.id, link.href)}
                 className="text-xs font-mono tracking-wider uppercase py-2 text-[#0A0A0A] dark:text-white hover:pl-2 transition-all border-b border-[#F7F7F7] dark:border-[#1F1F1F]"
               >
                 {link.label}

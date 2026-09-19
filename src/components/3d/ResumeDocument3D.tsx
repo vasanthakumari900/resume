@@ -220,9 +220,8 @@ export const ResumeDocument3D: React.FC<ResumeDocument3DProps> = ({
     window.addEventListener('resize', handleResize);
 
     // Animation Loop
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = performance.now() * 0.001;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.06;
       mouse.y += (mouse.targetY - mouse.y) * 0.06;

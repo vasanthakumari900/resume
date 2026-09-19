@@ -39,7 +39,7 @@ export const WorkspaceScene: React.FC<WorkspaceSceneProps> = ({ className = 'w-f
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     container.appendChild(renderer.domElement);
 
     // Lighting
@@ -378,9 +378,8 @@ export const WorkspaceScene: React.FC<WorkspaceSceneProps> = ({ className = 'w-f
     window.addEventListener('resize', onResize);
 
     // Animation Loop
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = performance.now() * 0.001;
 
       // Smooth camera damping
       mouse.x += (mouse.targetX - mouse.x) * 0.05;

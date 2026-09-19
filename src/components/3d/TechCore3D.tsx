@@ -234,10 +234,12 @@ export const TechCore3D: React.FC<TechCore3DProps> = ({ onSelectTech }) => {
     window.addEventListener('resize', handleResize);
 
     // Clock & Animation Loop
-    let clock = new THREE.Clock();
+    let prevTime = performance.now();
     const animate = () => {
-      const delta = clock.getDelta();
-      const elapsed = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = Math.min((now - prevTime) * 0.001, 0.1);
+      prevTime = now;
+      const elapsed = now * 0.001;
 
       // Rotate central core
       coreGroup.rotation.y = elapsed * 0.4;

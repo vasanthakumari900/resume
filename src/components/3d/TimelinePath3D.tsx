@@ -242,9 +242,8 @@ export const TimelinePath3D: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     // Animation Loop
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = performance.now() * 0.001;
 
       // Camera smoothly tracks active milestone target
       const targetPoint = pathPoints[activeIndex];

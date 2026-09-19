@@ -206,9 +206,8 @@ export const Contact: React.FC = () => {
     };
     window.addEventListener('resize', onResize);
 
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = performance.now() * 0.001;
 
       mouse.x += (mouse.targetX - mouse.x) * 0.06;
       mouse.y += (mouse.targetY - mouse.y) * 0.06;

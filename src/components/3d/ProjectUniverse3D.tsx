@@ -269,9 +269,8 @@ export const ProjectUniverse3D: React.FC<ProjectUniverse3DProps> = ({ onOpenCase
     window.addEventListener('resize', handleResize);
 
     // Animation Loop
-    let clock = new THREE.Clock();
     const animate = () => {
-      const elapsed = clock.getElapsedTime();
+      const elapsed = performance.now() * 0.001;
 
       pods.forEach((p, i) => {
         const isHovered = hoveredProject === p.project.id;
